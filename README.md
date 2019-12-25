@@ -12,8 +12,7 @@ Note: This does not interact with the game at any level or in any way.
 
 ## How it works
 It's super simple. It takes a screenshot of a specific area of your monitor (Where the BG Queue window pops up).  
-It then uses Windows 10 Built-in OCR (Optical Character Recognition) to read the text in that screenshot to see if a BG has popped.  
-If it has, it sends you a message on Discord. Too easy!
+It then uses Windows 10 Built-in OCR (Optical Character Recognition) to read the text in that screenshot to see if a BG has popped. If it has, it sends you a message on Discord. Too easy!
 
 ## Download Options
 
@@ -55,6 +54,7 @@ Write-Output "X: $X | Y: $Y"
 Join a BG Queue and wait for the BG Notification window to popup on your game screen. Click once in the PowerShell ISE window to focus that program. Now move your mouse to the top left of the BG Notification Box. Do not click the wow screen at any time! Instead press F5, which will run that code snippet above. It will Give you the X and Y coordinate of your mouse curser. Now move your mouse to the bottom right of the Battleground Notification window and press F5 again to get those coordinates.  
 
 These 4 coordinates are what you will use to enter into the coordinate section in the Powershell script.  
+If you can't do this easily with multiple monitors, you may need to play some trial and error with entering in guestimated x and y coordinates until you get a close enough box for where your Battleground Queue window pops up at.
 
 2. Screenshot Path
 Set the path to where you would like the temporary screenshot to be saved to. By default it goes to C:\temp\  

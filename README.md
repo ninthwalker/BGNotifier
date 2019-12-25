@@ -5,13 +5,13 @@ Note: This does not interact with the game at any level or in any way.
 
 ## Details/Requirements
 1. Windows 10
-2. Powershell 3.0+
-3. .Net Framework 3.5+ (Usually already on your windows computer)
-4. A World of Warcraft Subscription.
-5. Probably a little computer/command line know-how.  
+2. Powershell 3.0+ (Comes with WIN10)
+3. .Net Framework 3.5+ (Usually already on Windows 10 as well)
+4. A World of Warcraft Subscription. (You have to put this on your WIN 10 computer yourself)
+5. Probably a little computer/command line know-how. Or a C in Reading Comprehension 101 to follow the below instructions.
 
 ## How it works
-It's super simple. It takes a screenshot of a specific area of your monitor (Where the BG Que window pops up).  
+It's super simple. It takes a screenshot of a specific area of your monitor (Where the BG Queue window pops up).  
 It then uses Windows 10 Built-in OCR (Optical Character Recognition) to read the text in that screenshot to see if a BG has popped.  
 If it has, it sends you a message on Discord. Too easy!
 
@@ -36,7 +36,6 @@ Depending on your download method/settings, you may need to 'unblock' the files 
 5. once setup is completed, you can launch the script by entering the following command in powershell:  
 `.\BGNotifier.ps1`  
 
-
 ## Config/Settings  
 Some initial configurations is required before it will work for you.  
 If you right click and edit the BGNotifier.ps1 file you will see a section near the top that requires you to enter your own settings.
@@ -53,12 +52,12 @@ $Y = [System.Windows.Forms.Cursor]::Position.Y
 Write-Output "X: $X | Y: $Y"
 ```  
 
-Join a BG Queue and wait for the BG Notification window to popup on your screen. Click once in the PowerShell ISE window to focus that program. Now move your mouse to the top left of the BG Notification Box. Do not click the wow screen at any time! Instead press F5, which will run that code snippet above. It will Give you the X and Y coordinate of your mouse curser. Now move your mouse to the bottom right of the Battleground Notification window and press F5 again to get those coordinates.  
+Join a BG Queue and wait for the BG Notification window to popup on your game screen. Click once in the PowerShell ISE window to focus that program. Now move your mouse to the top left of the BG Notification Box. Do not click the wow screen at any time! Instead press F5, which will run that code snippet above. It will Give you the X and Y coordinate of your mouse curser. Now move your mouse to the bottom right of the Battleground Notification window and press F5 again to get those coordinates.  
 
 These 4 coordinates are what you will use to enter into the coordinate section in the Powershell script.  
 
 2. Screenshot Path
-Set the path to where you would like the temporary screenshot the script takes. By default it goes to C:\temp\  
+Set the path to where you would like the temporary screenshot to be saved to. By default it goes to C:\temp\  
 
 3. Screenshot Delay
 If you would like to change how often the script scans for the Battleground Queue Window you can enter a different time here in seconds.
@@ -68,8 +67,8 @@ Then you have to get off the toilet and make it back to your computer in time. F
 4. Discord Webhook URL
 Enter in the discord webhook for the channel you would like the notification to go to.  
 Discord > Click cogwheel next to a channel to edit it > Webhooks > Create webhook.
-See this quick youtube video I found if you need further help. It's very easy. Do not share this webhook with anyone else.  
-[Creat Discord Webhook](https://www.youtube.com/watch?v=zxi926qhP7w)
+See this quick youtube video I found if you need further help. It's very easy. Do not share this Webhook with anyone else.  
+[Create Discord Webhook](https://www.youtube.com/watch?v=zxi926qhP7w)
 
 
 ## Screenshots  

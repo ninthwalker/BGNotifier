@@ -56,15 +56,15 @@ Join a BG Queue and wait for the BG Notification window to popup on your game sc
 These 4 coordinates are what you will use to enter into the coordinate section in the Powershell script.  
 If you can't do this easily with multiple monitors, you may need to play some trial and error with entering in guestimated x and y coordinates until you get a close enough box for where your Battleground Queue window pops up at.
 
-2. Screenshot Path
+2. Screenshot Path  
 Set the path to where you would like the temporary screenshot to be saved to. By default it goes to C:\temp\  
 
-3. Screenshot Delay
+3. Screenshot Delay  
 If you would like to change how often the script scans for the Battleground Queue Window you can enter a different time here in seconds.
 Note: this script uses hardly any resources and is very quick at the screenshot/OCR process. Keep in mind you have 1.5min to accept the Queue. And this script needs to see the popup, and send the notification.  
 Then you have to get off the toilet and make it back to your computer in time. Food for thought.
 
-4. Discord Webhook URL
+4. Discord Webhook URL  
 Enter in the discord webhook for the channel you would like the notification to go to.  
 Discord > Click cogwheel next to a channel to edit it > Webhooks > Create webhook.
 See this quick youtube video I found if you need further help. It's very easy. Do not share this Webhook with anyone else.  

@@ -15,7 +15,6 @@ It's super simple. It takes a screenshot of a specific area of your monitor (Whe
 It then uses Windows 10 Built-in OCR (Optical Character Recognition) to read the text in that screenshot to see if a BG has popped. If it has, it sends you a message on Discord. Too easy!
 
 ## How to use  
-Note: You may receive an 'Unknown Publisher' popup when you click the shortcut because i'm not a fancy publisher. You can just click 'open'.
 After clicking the shortcut (Download Option One) or Lauching the Script from the command line (Download Option Two):
 1. Click 'Start' to begin scanning for BG Queue's and notifying you.
 2. Click 'Stop' to halt the scanning and notifications.
@@ -24,21 +23,23 @@ After clicking the shortcut (Download Option One) or Lauching the Script from th
   
 ## Download Options
 
-**Note:**
-Depending on your download method/settings, you may need to 'unblock' the files after downloading them from Github. This is normal behavior for Microsoft Windows to do for files downloaded from the internet.  
-`Right click > Properties > Check 'Unblock'`
 
-**Option One** (Recommended)
-1. Copy the 'BGNotifier.lnk' shortcut, as well as the BGNotifier.ps1 file to your computer. Place in the same directory.
-3. Once Setup is completed, you can double click the shortcut to run the Battleground Notifier.  
+**Option One**  
+ (Recommended - Easiest to use)
+
+1. Click the 'Clone or Download' link on this page. Then select 'Download Zip'
+2 . You may need to 'unblock' the zip file downloaded. This is normal behavior for Microsoft Windows to do for files downloaded from the internet.  
+`Right click > Properties > Check 'Unblock'`
+3. Extract the contents of the ZIP file. You only need the 'BGNotifier.lnk' shortcut, and the BGNotifier.ps1 files. Make sure these 2 files are kept in the same directory wherever you move them to.  
+4. Once Setup is completed, you can double click the shortcut to run the Battleground Notifier script.  
 
 **Option Two**
+(For those will some Powershell experience, or if you don't want to use the shortcut method above)
 1. Copy the BGNotifier.ps1 file to your desktop.
 2. Open a powershell console and navigate to the folder you saved the BGNotifier.ps1 file to.
 3. Enter the below command to temporarily set the execution policy:  
-  `Set-ExecutionPolicy -Scope Process Bypass`  
-  Alternatively, set the execution policy to permanently allow powershell scripts:  
-  `Set-ExecutionPolicy -Scope Currentuser Unrestricted`  
+`Set-ExecutionPolicy -Scope Process Bypass`  
+Alternatively, set the execution policy to permanently allow powershell scripts:  
 4. See Initial Setup section below to configure.
 5. once setup is completed, you can launch the script by entering the following command in powershell:  
 `.\BGNotifier.ps1`  
@@ -47,8 +48,8 @@ Depending on your download method/settings, you may need to 'unblock' the files 
 Some initial configuration is required before it will work for you.  
 If you right click and edit the BGNotifier.ps1 file you will see a section near the top that requires you to enter your own settings.
 
-1. Configure the X,Y Coordinates of your battleGround Que Window  
-Everyones monitors are different, so we need to get your coordinate for where your BG Que window pops up.
+1. Configure the X,Y Coordinates of your Battleground Queue window    
+Everyones monitors are different, so we need to get your coordinate for where your BG Queue window pops up.
 If you have multiple monitors, the best way to do this is to open your game on the main monitor and a Powershell ISE window on another. 
 Press 'CTRL+R' to open the script pane. Then paste the following code into the top window.  
 
@@ -61,7 +62,7 @@ Write-Output "X: $X | Y: $Y"
 
 Join a BG Queue and wait for the BG Notification window to popup on your game screen. Click once in the PowerShell ISE window to focus that program. Now move your mouse to the top left of the BG Notification Box. Do not click the wow screen at any time! Instead press F5, which will run that code snippet above. It will Give you the X and Y coordinate of your mouse curser. Now move your mouse to the bottom right of the Battleground Notification window and press F5 again to get those coordinates.  
 
-These 4 coordinates are what you will use to enter into the coordinate section in the Powershell script.  
+These four coordinates are what you will use to enter into the coordinate section in the Powershell script.  
 If you can't do this easily with multiple monitors, you may need to play some trial and error with entering in guestimated x and y coordinates until you get a close enough box for where your Battleground Queue window pops up at.
 
 2. Screenshot Path  
@@ -74,6 +75,7 @@ Then you have to get off the toilet and make it back to your computer in time. F
   
 4. Stop on Queue
 Set to Yes or No. 'Yes' will stop the script upon BG Queue detection. 'No' will have it continue to scan and must be stopped manually.  
+Default is 'Yes'
 
 5. Discord Webhook URL  
 Enter in the discord webhook for the channel you would like the notification to go to.  

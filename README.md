@@ -15,6 +15,7 @@ It's super simple. It takes a screenshot of a specific area of your monitor (Whe
 It then uses Windows 10 Built-in OCR (Optical Character Recognition) to read the text in that screenshot to see if a BG has popped. If it has, it sends you a message on Discord. Too easy!
 
 ## How to use  
+Note: You may receive an 'Unknown Publisher' popup when you click the shortcut because i'm not a fancy publisher. You can just click 'open'.
 After clicking the shortcut (Download Option One) or Lauching the Script from the command line (Download Option Two):
 1. Click 'Start' to begin scanning for BG Queue's and notifying you.
 2. Click 'Stop' to halt the scanning and notifications.

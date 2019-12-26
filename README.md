@@ -80,7 +80,7 @@ Note: this script uses hardly any resources and is very quick at the screenshot/
 Then you have to get off the toilet and make it back to your computer in time. Food for thought.  
 Default Value: 15 seconds
   
-4. Stop on Queue
+4. Stop on Queue  
 Set to Yes or No. 'Yes' will stop the script upon BG Queue detection. 'No' will have it continue to scan and must be stopped manually.  
 Default is 'Yes'
 

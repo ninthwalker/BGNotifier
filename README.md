@@ -50,19 +50,26 @@ If you right click and edit the BGNotifier.ps1 file you will see a section near 
 1. Configure the X,Y Coordinates of your Battleground Queue window    
 Everyones monitors are different, so we need to get your coordinate for where your BG Queue window pops up.
 If you have multiple monitors, the best way to do this is to open your game on the main monitor and a Powershell ISE window on another. 
-Press 'CTRL+R' to open the script pane. Then paste the following code into the top window.  
+Press 'CTRL+R' to open the script pane. Then paste the following code into the top window.    
 
 ```
-Add-Type -AssemblyName System.Windows.Forms
-$X = [System.Windows.Forms.Cursor]::Position.X
-$Y = [System.Windows.Forms.Cursor]::Position.Y
-Write-Output "X: $X | Y: $Y"
+Add-Type -AssemblyName System.Windows.Forms,PresentationFramework
+ 
+While( $true ) {
+    If( ([System.Windows.Input.Keyboard]::IsKeyDown([System.Windows.Input.Key]::LeftShift)) -and ([System.Windows.Input.Keyboard]::IsKeyDown([System.Windows.Input.Key]::LeftCtrl)) ) { Break }
+    If( [System.Windows.Forms.UserControl]::MouseButtons -ne "None" ) { 
+      While( [System.Windows.Forms.UserControl]::MouseButtons -ne "None" ) { Start-Sleep -Milliseconds 100 }  ### Wait for the MOUSE UP event
+      
+        $X = [System.Windows.Forms.Cursor]::Position.X
+        $Y = [System.Windows.Forms.Cursor]::Position.Y
+        Write-Output "X: $X | Y: $Y"
+
+    }
+    Start-Sleep -Milliseconds 100
+}
 ```  
 
-Join a BG Queue and wait for the BG Notification window to popup on your game screen. Click once in the PowerShell ISE window to focus the Powershell ISE program. Now move your mouse to the top left of the BG Notification Box. Do not click the wow screen at any time! Instead press F5, which will run that code snippet above. It will Give you the X and Y coordinate of your mouse curser. Now move your mouse to the bottom right of the Battleground Notification window and press F5 again to get those coordinates.  
-
-These four coordinates are what you will use to enter into the coordinate section in the Powershell script.  
-If you can't do this easily with multiple monitors, you may need to play some trial and error with entering in guestimated x and y coordinates until you get a close enough box for where your Battleground Queue window pops up at.
+Join a BG Queue and wait for the BG Notification window to popup on your game screen. Click once in the PowerShell ISE window to focus the program, then press F5 to run the code snippet. Now move your mouse to the top left of the BG Notification Box and click. The current mouse pointer position will be printed to the powershell console. Now move your mouse to the bottom right of the Battleground Notification window and click again. This will Give you the X and Y coordinates that are needed for the Coordinates section in the Powershell script.
 
 2. Screenshot Path  
 Set the path to where you would like the temporary screenshot to be saved to. By default it goes to C:\temp\  

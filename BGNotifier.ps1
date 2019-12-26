@@ -264,7 +264,6 @@ $form.FormBorderStyle           = "FixedDialog"
 # Start Button
 $button_start                   = New-Object system.Windows.Forms.Button
 $button_start.BackColor         = "#f5a623"
-$button_start.ForeColor         = "#008000"
 $button_start.text              = "START"
 $button_start.width             = 80
 $button_start.height            = 25
@@ -276,7 +275,7 @@ $button_start.FlatStyle         = "Flat"
 $button_stop                    = New-Object system.Windows.Forms.Button
 $button_stop.BackColor          = "#f5a623"
 $button_stop.ForeColor          = "#FF0000"
-$button_stop.texT               = "STOP"
+$button_stop.text               = "STOP"
 $button_stop.width              = 80
 $button_stop.height             = 25
 $button_stop.location           = New-Object System.Drawing.Point(130,15)

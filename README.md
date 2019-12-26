@@ -34,13 +34,13 @@ After clicking the shortcut (Download Option One) or Lauching the Script from th
 
 **Option Two**  
 (For those will some Powershell experience, or if you don't want to use the shortcut method above)
-1. Copy the BGNotifier.ps1 file to your desktop.
+1. Copy the BGNotifier.ps1 file to your computer.
 2. Open a powershell console and navigate to the folder you saved the BGNotifier.ps1 file to.
 3. Enter the below command to temporarily set the execution policy:  
 `Set-ExecutionPolicy -Scope Process Bypass`  
 Alternatively, set the execution policy to permanently allow powershell scripts:  
-4. See Initial Setup section below to configure.
-5. once setup is completed, you can launch the script by entering the following command in powershell:  
+`Set-ExecutionPolicy -Scope Currentuser Unrestricted`  
+4. Once setup is completed, you can launch the script by entering the following command in powershell:  
 `.\BGNotifier.ps1`  
 
 ## Config/Settings  
@@ -71,6 +71,7 @@ Set the path to where you would like the temporary screenshot to be saved to. By
 If you would like to change how often the script scans for the Battleground Queue Window you can enter a different time here in seconds.
 Note: this script uses hardly any resources and is very quick at the screenshot/OCR process. Keep in mind you have 1.5min to accept the Queue. And this script needs to see the popup, and send the notification.  
 Then you have to get off the toilet and make it back to your computer in time. Food for thought.  
+Default Value: 15 seconds
   
 4. Stop on Queue
 Set to Yes or No. 'Yes' will stop the script upon BG Queue detection. 'No' will have it continue to scan and must be stopped manually.  

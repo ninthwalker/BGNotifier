@@ -21,19 +21,18 @@ After clicking the shortcut (Download Option One) or Lauching the Script from th
 3. ???
 4. Profit!  
   
-## Download Options
-
+## Download Options  
 
 **Option One**  
  (Recommended - Easiest to use)
 
-1. Click the 'Clone or Download' link on this page. Then select 'Download Zip'
+1. Click the 'Clone or Download' link on this page. Then select 'Download Zip'  
 2 . You may need to 'unblock' the zip file downloaded. This is normal behavior for Microsoft Windows to do for files downloaded from the internet.  
 `Right click > Properties > Check 'Unblock'`
 3. Extract the contents of the ZIP file. You only need the 'BGNotifier.lnk' shortcut, and the BGNotifier.ps1 files. Make sure these 2 files are kept in the same directory wherever you move them to.  
 4. Once Setup is completed, you can double click the shortcut to run the Battleground Notifier script.  
 
-**Option Two**
+**Option Two**  
 (For those will some Powershell experience, or if you don't want to use the shortcut method above)
 1. Copy the BGNotifier.ps1 file to your desktop.
 2. Open a powershell console and navigate to the folder you saved the BGNotifier.ps1 file to.

@@ -16,7 +16,7 @@ It's super simple. It takes a screenshot of a specific area of your monitor (Whe
 It then uses Windows 10 Built-in OCR (Optical Character Recognition) to read the text in that screenshot to see if a BG has popped. If it has, it sends you a message on Discord. Too easy!
 
 ## How to use  
-Prereq's: WoW Must be running in the foreground of your monitor.  Discord App on your computer must not be running. (Discord does not send mobile notifications if you are using a Discord app on your computer)
+Prereq's: WoW Must be running in the foreground of your monitor.  Discord App on your computer must not be running. (Discord does not send mobile notifications if you are using a Discord app on your computer)  
 After clicking the shortcut (Download Option One) or Lauching the Script from the command line (Download Option Two):  
 
 1. Click 'Start' to begin scanning for BG Queue's and notifying you.

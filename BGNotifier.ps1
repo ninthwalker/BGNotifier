@@ -1,4 +1,4 @@
-﻿#####################################################################
+#####################################################################
 # Name: BGNotifier                                                  #
 # Desc: Notifies you if a WoW Battleground Queue has popped.        #
 # Author: Ninthwalker                                               #
@@ -31,13 +31,13 @@ $path = "C:\temp\"
 # Note: this script uses hardly any resources and is very quick at the screenshot/OCR process.
 # Keep in mind you have 1.5min to accept the Queue. And this script needs to see the popup, and send the notification.
 # Then you have to get off the toilet and make it back to your computer in time. Food for thought.
-$delay = 15
+$delay = 20
 
 # Option to stop BGNotifier once a BG Queue has popped. "Yes" to stop the program, or "No" to keep it running.
 $stopOnQueue = "Yes"
 
 # Your Discord Channel Webhook. Put your own here.
-$discordWebHook = "https://discordapp.com/api/webhooks/659308 - looks something like this - HRebC2J0GIJP1aDASDlhdajhsdfLIHBUEysJ-fR"
+$discordWebHook = "https://discordapp.com/api/webhooks/659308345060229150/C61YEV - LOOKS SOMETHING LIKE THIS - 5Ksp-JHReb3dfsYJG8DWgUEtQpEunzGn7ysJ-Gx"
 
 
 #########################################
@@ -58,10 +58,48 @@ $null = [Windows.Storage.Streams.RandomAccessStream, Windows.Storage.Streams, Co
 
 # used to find the BG queue popup location coordinates on  your monitor
 function Get-Coords {
-    Add-Type -AssemblyName System.Windows.Forms
-    $X = [System.Windows.Forms.Cursor]::Position.X
-    $Y = [System.Windows.Forms.Cursor]::Position.Y
-    Write-Output "X: $X | Y: $Y"
+
+    $form.TopMost = $True
+    $script:label_coords_text.Visible = $False
+    $button_start.Visible = $False
+    $label_status.Text = ""
+    $label_status.Refresh()
+    $script:label_coords1.Text = ""
+    $script:label_coords1.Refresh()
+    $script:label_coords2.Text = ""
+    $script:label_coords2.Refresh()
+    $script:label_coords1.Visible = $True
+    $script:label_coords2.Visible = $True
+    $script:label_coords_text2.Visible = $True
+    $script:cancelLoop = $False
+    $count = 1
+
+    While( $true ) {
+
+        If( ([System.Windows.Input.Keyboard]::IsKeyDown([System.Windows.Input.Key]::LeftShift)) -and ([System.Windows.Input.Keyboard]::IsKeyDown([System.Windows.Input.Key]::LeftCtrl)) -or ($script:cancelLoop) -or ($count -gt 2)) { 
+            Break
+        }
+        If( [System.Windows.Forms.UserControl]::MouseButtons -ne "None" ) { 
+          While( [System.Windows.Forms.UserControl]::MouseButtons -ne "None" ) { Start-Sleep -Milliseconds 100 }  ### Wait for the MOUSE UP event
+        
+            $mp = [Windows.Forms.Cursor]::Position
+            $X = [System.Windows.Forms.Cursor]::Position.X
+            $Y = [System.Windows.Forms.Cursor]::Position.Y
+            if ($count -eq 1) {
+                $script:label_coords1.Text = "Top left: $($mp.ToString().Replace('{','').Replace('}',''))" 
+                $script:label_coords1.Refresh()
+            }
+            if ($count -eq 2) {
+                $script:label_coords2.Text = "Bottom Right: $($mp.ToString().Replace('{','').Replace('}',''))"
+                $script:label_coords2.Refresh()
+            }
+            $count++
+            
+        }
+        [System.Windows.Forms.Application]::DoEvents()
+        Start-Sleep -Milliseconds 100
+
+    }
 }
 
 # Screenshot function
@@ -180,8 +218,13 @@ function Get-Ocr {
 # Notification function
 function BGNotifier {
     $button_start.Enabled = $False
+    $button_start.Visible = $False
     $button_stop.Enabled = $True
+    $button_stop.Visible = $True
     $form.MinimizeBox = $False # disable while running since it breaks things
+    $script:label_coords_text.Visible = $False
+    $label_help.Visible = $False
+    $label_status.ForeColor = "#7CFC00"
     $label_status.text = "BG Notifier is Running!"
     $label_status.Refresh()
     $script:cancelLoop = $False
@@ -194,10 +237,14 @@ function BGNotifier {
 
             if ($script:cancelLoop) {
                 $button_start.Enabled = $True
+                $button_start.Visible = $True
                 $button_stop.Enabled = $False
+                $button_stop.Visible = $False
                 $form.MinimizeBox = $True
                 $label_status.text = ""
                 $label_status.Refresh()
+                $script:label_coords_text.Visible = $True
+                $label_help.Visible = $True
                 Break check
             }
 
@@ -237,10 +284,15 @@ function BGNotifier {
     Invoke-RestMethod -Uri $discordWebHook -Method POST -Headers $headers -Body $body
 
     if ($stopOnQueue -eq "Yes") {
+        $label_status.ForeColor = "#FFFF00"
         $label_status.text = "Your Queue Popped!"
         $label_status.Refresh()
-        $button_start.Enabled = $True
         $button_stop.Enabled = $False
+        $button_stop.Visible = $False
+        $button_start.Enabled = $True
+        $button_start.Visible = $True
+        $script:label_coords_text.Visible = $True
+        $label_help.Visible = $True
         $form.MinimizeBox = $True
     }
     elseif ($stopOnQueue -eq "No") {
@@ -251,9 +303,9 @@ function BGNotifier {
 
 # Form section
 $form                           = New-Object System.Windows.Forms.Form
-$form.Text                      ='BG Notifier'
+$form.Text                      ='BGNotifier'
 $form.Width                     = 250
-$form.Height                    = 120
+$form.Height                    = 130
 $form.AutoSize                  = $True
 $form.MaximizeBox               = $False
 $form.BackColor                 = "#4a4a4a"
@@ -265,9 +317,9 @@ $form.FormBorderStyle           = "FixedDialog"
 $button_start                   = New-Object system.Windows.Forms.Button
 $button_start.BackColor         = "#f5a623"
 $button_start.text              = "START"
-$button_start.width             = 80
-$button_start.height            = 25
-$button_start.location          = New-Object System.Drawing.Point(20,15)
+$button_start.width             = 120
+$button_start.height            = 50
+$button_start.location          = New-Object System.Drawing.Point(62,15)
 $button_start.Font              = 'Microsoft Sans Serif,9,style=Bold'
 $button_start.FlatStyle         = "Flat"
 
@@ -276,12 +328,13 @@ $button_stop                    = New-Object system.Windows.Forms.Button
 $button_stop.BackColor          = "#f5a623"
 $button_stop.ForeColor          = "#FF0000"
 $button_stop.text               = "STOP"
-$button_stop.width              = 80
-$button_stop.height             = 25
-$button_stop.location           = New-Object System.Drawing.Point(130,15)
+$button_stop.width              = 120
+$button_stop.height             = 50
+$button_stop.location           = New-Object System.Drawing.Point(62,15)
 $button_stop.Font               = 'Microsoft Sans Serif,9,style=Bold'
 $button_stop.FlatStyle          = "Flat"
 $button_stop.Enabled            = $False
+$button_stop.Visible            = $False
 
 # Status label
 $label_status                   = New-Object system.Windows.Forms.Label
@@ -289,13 +342,85 @@ $label_status.text              = ""
 $label_status.AutoSize          = $True
 $label_status.width             = 30
 $label_status.height            = 20
-$label_status.location          = New-Object System.Drawing.Point(20,50)
+$label_status.location          = New-Object System.Drawing.Point(60,75)
 $label_status.Font              = 'Microsoft Sans Serif,10,style=Bold'
 $label_status.ForeColor         = "#7CFC00"
 
+# Coords label text
+$script:label_coords_text            = New-Object system.Windows.Forms.LinkLabel
+$script:label_coords_text.text       = "Get Coords"
+$script:label_coords_text.AutoSize   = $True
+$script:label_coords_text.width      = 30
+$script:label_coords_text.height     = 20
+$script:label_coords_text.location   = New-Object System.Drawing.Point(5,100)
+$script:label_coords_text.Font       = 'Microsoft Sans Serif,9,'
+$script:label_coords_text.ForeColor  = "#00ff00"
+$script:label_coords_text.LinkColor  = "#f5a623"
+$script:label_coords_text.ActiveLinkColor = "#f5a623"
+$script:label_coords_text.add_Click({Get-Coords})
+
+# Coords label text exit
+$script:label_coords_text2            = New-Object system.Windows.Forms.LinkLabel
+$script:label_coords_text2.text       = "Exit Coords"
+$script:label_coords_text2.AutoSize   = $True
+$script:label_coords_text2.width      = 30
+$script:label_coords_text2.height     = 20
+$script:label_coords_text2.location   = New-Object System.Drawing.Point(5,100)
+$script:label_coords_text2.Font       = 'Microsoft Sans Serif,9,'
+$script:label_coords_text2.ForeColor  = "#00ff00"
+$script:label_coords_text2.LinkColor  = "#f5a623"
+$script:label_coords_text2.ActiveLinkColor = "#f5a623"
+$script:label_coords_text2.Visible    = $False
+$script:label_coords_text2.add_Click({
+    $script:cancelLoop = $True
+    $script:label_coords1.Visible = $False
+    $script:label_coords2.Visible = $False
+    $button_start.Visible = $True
+    $script:label_coords1.Text = ""
+    $script:label_coords1.Refresh()
+    $script:label_coords2.Text = ""
+    $script:label_coords2.Refresh()
+    $script:label_coords_text2.Visible = $False
+    $script:label_coords_text.Visible = $True
+
+    $form.TopMost = $False
+})
+
+# Coords label top left
+$script:label_coords1            = New-Object system.Windows.Forms.Label
+$script:label_coords1.Text       = ""
+$script:label_coords1.AutoSize   = $True
+$script:label_coords1.width      = 30
+$script:label_coords1.height     = 20
+$script:label_coords1.location   = New-Object System.Drawing.Point(10,15)
+$script:label_coords1.Font       = 'Microsoft Sans Serif,10,style=Bold'
+$script:label_coords1.ForeColor  = "#f5a623"
+
+# Coords label bottom right
+$script:label_coords2            = New-Object system.Windows.Forms.Label
+$script:label_coords2.Text       = ""
+$script:label_coords2.AutoSize   = $True
+$script:label_coords2.width      = 30
+$script:label_coords2.height     = 20
+$script:label_coords2.location   = New-Object System.Drawing.Point(10,40)
+$script:label_coords2.Font       = 'Microsoft Sans Serif,10,style=Bold'
+$script:label_coords2.ForeColor  = "#f5a623"
+
+# Help link
+$label_help                     = New-Object system.Windows.Forms.LinkLabel
+$label_help.text                = "Help"
+$label_help.AutoSize            = $true
+$label_help.width               = 70
+$label_help.height              = 20
+$label_help.location            = New-Object System.Drawing.Point(210,100)
+$label_help.Font                = 'Microsoft Sans Serif,9'
+$label_help.ForeColor           = "#00ff00"
+$label_help.LinkColor           = "#f5a623"
+$label_help.ActiveLinkColor     = "#f5a623"
+$label_help.add_Click({[system.Diagnostics.Process]::start("http://github.com/ninthwalker/BGNotifier")})
 
 # add all controls
-$form.Controls.AddRange(($button_start,$button_stop,$label_status))
+$form.Controls.AddRange(($button_start,$button_stop,$label_status,$script:label_coords_text,$script:label_coords_text2,$script:label_coords1,$script:label_coords2,$label_help))
 
 # Button methods
 $button_start.Add_Click({BGNotifier})

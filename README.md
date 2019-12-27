@@ -8,7 +8,8 @@ Note: This does not interact with the game at any level or in any way.
 2. Powershell 3.0+ (Comes with WIN10)
 3. .Net Framework 3.5+ (Usually already on Windows 10 as well)
 4. A World of Warcraft Subscription. (You have to put this on your WIN 10 computer yourself)
-5. Probably a little computer/command line know-how. Or a C in Reading Comprehension 101 to follow the below instructions.
+5. A discord account and discord app on your phone (Other apps/notifications possible in the future if requested)
+6. Probably a little computer/command line know-how. Or a C in Reading Comprehension 101 to follow the below instructions.
 
 ## How it works
 It's super simple. It takes a screenshot of a specific area of your monitor (Where the BG Queue window pops up).  
@@ -48,37 +49,24 @@ Some initial configuration is required before it will work for you.
 If you right click and edit the BGNotifier.ps1 file you will see a section near the top that requires you to enter your own settings.
 
 1. Configure the X,Y Coordinates of your Battleground Queue window    
-Everyones monitors are different, so we need to get your coordinate for where your BG Queue window pops up.
-If you have multiple monitors, the best way to do this is to open your game on the main monitor and a Powershell ISE window on another. 
-Press 'CTRL+R' to open the script pane. Then paste the following code into the top window.    
+Everyones monitors are different, so we need to get your coordinate for where your BG Queue window pops up.  
 
-```
-Add-Type -AssemblyName System.Windows.Forms,PresentationFramework
- 
-While( $true ) {
-    If( ([System.Windows.Input.Keyboard]::IsKeyDown([System.Windows.Input.Key]::LeftShift)) -and ([System.Windows.Input.Keyboard]::IsKeyDown([System.Windows.Input.Key]::LeftCtrl)) ) { Break }
-    If( [System.Windows.Forms.UserControl]::MouseButtons -ne "None" ) { 
-      While( [System.Windows.Forms.UserControl]::MouseButtons -ne "None" ) { Start-Sleep -Milliseconds 100 }  ### Wait for the MOUSE UP event
-      
-        $X = [System.Windows.Forms.Cursor]::Position.X
-        $Y = [System.Windows.Forms.Cursor]::Position.Y
-        Write-Output "X: $X | Y: $Y"
-
-    }
-    Start-Sleep -Milliseconds 100
-}
-```  
-
-Join a BG Queue and wait for the BG Notification window to popup on your game screen. Click once in the PowerShell ISE window to focus the program, then press F5 to run the code snippet. Now move your mouse to the top left of the BG Notification Box and click. The current mouse pointer position will be printed to the powershell console. Now move your mouse to the bottom right of the Battleground Notification window and click again. This will Give you the X and Y coordinates that are needed for the Coordinates section in the Powershell script.
+a. Open WoW and queue for a BG. Once a BG Queue pops, leave it up and go to step b.  
+b. Launch the BGNotifier app and click the 'Get Coords'.  
+c. The next 2 mouse clicks that you perform will be recorded into the window for you to get the X,Y coordinates.  
+Your first click should be on the top left corner of the BG Queue window. Your second click should be on the bottom right of the BG Queue window. If you miss, or mess up, just click 'Exit Coords' in the app, and start again by clicking 'Get Coords'
+d. Keep the BGNotifier app open, Write down, memorize (you're smart), or screenshot the BGNotifier window that has the Top Left and Bottom Right X,Y coordinates. You will need for the next step.
+e. Right click on the actual script file. (BGNotifier.ps1) and select Edit. This should open the script for editing. Enter in the coordinates created during step d into their respective sections.
 
 2. Screenshot Path  
-Set the path to where you would like the temporary screenshot to be saved to. By default it goes to C:\temp\  
+Set the path to where you would like the temporary screenshot to be saved to.  
+By default it goes to C:\temp\  
 
 3. Screenshot Delay  
 If you would like to change how often the script scans for the Battleground Queue Window you can enter a different time here in seconds.
 Note: this script uses hardly any resources and is very quick at the screenshot/OCR process. Keep in mind you have 1.5min to accept the Queue. And this script needs to see the popup, and send the notification.  
 Then you have to get off the toilet and make it back to your computer in time. Food for thought.  
-Default Value: 15 seconds
+Default Value: 20 seconds, which should give you about 1 minute after you get the notification to make it back to accept the Queue.  
   
 4. Stop on Queue  
 Set to Yes or No. 'Yes' will stop the script upon BG Queue detection. 'No' will have it continue to scan and must be stopped manually.  
@@ -87,11 +75,11 @@ Default is 'Yes'
 5. Discord Webhook URL  
 Enter in the discord webhook for the channel you would like the notification to go to.  
 Discord > Click cogwheel next to a channel to edit it > Webhooks > Create webhook.
-See this quick youtube video I found if you need further help. It's very easy. Do not share this Webhook with anyone else.  
+See this quick video I found on Youtube if you need further help. It's very easy. Do not share this Webhook with anyone else.  
 [Create Discord Webhook](https://www.youtube.com/watch?v=zxi926qhP7w)
 
 
-## Screenshots  
+## Screenshots & Videos
 Note: Need to add still
 
 ![](https://raw.githubusercontent.com/ninthwalker/BattlegroundNotifier/master/screenshots/-.png)  

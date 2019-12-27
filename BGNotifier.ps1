@@ -15,15 +15,27 @@ using namespace Windows.Graphics.Imaging
 ##########################################
 
 
-# Coordinates of BG que window. Change these to your own
-# See Instructions on the Github page or use the Get-Coords function.
+### REQUIRED SETTINGS ###
+#########################
 
+# Your Discord Channel Webhook. Put your own here.
+$discordWebHook = "https://discordapp.com/api/webhooks/659308345060229150/Gt1YEVn2 - LOOKS SOMETHING LIKE THIS - Rzpn5Ksp-JHRebC2J0Gsdfasdfawer345agdgIJPgUEtQpEunzGn7ysJ-gR"
+
+
+### OPTIONAL ADVANCED SETTINGS ###
+#################################
+
+# Coordinates of BG que window. Change these to your own if you want to customize the area of the screenshot.
+# Default settings are to screenshot the top middle of your wow window which should be good for most people, but not all
+# See Instructions on the Github page or use the 'Get Coords' within the app to find the area you want to scan for the BG Queue window.
+# Change '$useMyOwnCoordinates' to "Yes" and set the coordinates to use your own.
+$useMyOwnCoordinates = "No"
 $topleftX     = 1461
 $topLeftY     = 241
 $bottomRightX = 1979
 $bottomRightY = 356
 
-# Screenshot Location to save temporary img to for OCR Scan
+# Screenshot Location to save temporary img to for OCR Scan. Change if you want it somewhere else.
 $path = "C:\temp\"
 
 # Amount of seconds to wait before scanning for a battleground Queue window.
@@ -33,10 +45,8 @@ $path = "C:\temp\"
 $delay = 20
 
 # Option to stop BGNotifier once a BG Queue has popped. "Yes" to stop the program, or "No" to keep it running.
+# Default is 'Yes', stop scanning after it detects a BG Queue pop.
 $stopOnQueue = "Yes"
-
-# Your Discord Channel Webhook. Put your own here.
-$discordWebHook = "https://discordapp.com/api/webhooks/659308345060229150/Gt1YEVn2 - LOOKS SOMETHING LIKE THIS - Rzpn5Ksp-JHRebC2J0Gsdfasdfawer345agdgIJPgUEtQpEunzGn7ysJ-gR"
 
 
 #########################################
@@ -53,7 +63,6 @@ $null = [Windows.Media.Ocr.OcrEngine,                Windows.Foundation,      Co
 $null = [Windows.Foundation.IAsyncOperation`1,       Windows.Foundation,      ContentType = WindowsRuntime]
 $null = [Windows.Graphics.Imaging.SoftwareBitmap,    Windows.Foundation,      ContentType = WindowsRuntime]
 $null = [Windows.Storage.Streams.RandomAccessStream, Windows.Storage.Streams, ContentType = WindowsRuntime]
-
 
 # used to find the BG queue popup location coordinates on  your monitor
 function Get-Coords {
@@ -229,6 +238,78 @@ function Get-Ocr {
         }
     }
 }
+
+# get window and sizes function
+Function Get-Window {
+    <#
+        .NOTES
+            Name: Get-Window
+            Author: Boe Prox
+    #>
+    [OutputType('System.Automation.WindowInfo')]
+    [cmdletbinding()]
+    Param (
+        [parameter(ValueFromPipelineByPropertyName=$True)]
+        $ProcessName
+    )
+    Begin {
+        Try{
+            [void][Window]
+        } Catch {
+        Add-Type @"
+              using System;
+              using System.Runtime.InteropServices;
+              public class Window {
+                [DllImport("user32.dll")]
+                [return: MarshalAs(UnmanagedType.Bool)]
+                public static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
+              }
+              public struct RECT
+              {
+                public int Left;        // x position of upper-left corner
+                public int Top;         // y position of upper-left corner
+                public int Right;       // x position of lower-right corner
+                public int Bottom;      // y position of lower-right corner
+              }
+"@
+        }
+    }
+    Process {        
+        Get-Process -Name $ProcessName | ForEach {
+            $Handle = $_.MainWindowHandle
+            $Rectangle = New-Object RECT
+            $Return = [Window]::GetWindowRect($Handle,[ref]$Rectangle)
+            If ($Return) {
+                $Height = $Rectangle.Bottom - $Rectangle.Top
+                $Width = $Rectangle.Right - $Rectangle.Left
+                $Size = New-Object System.Management.Automation.Host.Size -ArgumentList $Width, $Height
+                $TopLeft = New-Object System.Management.Automation.Host.Coordinates -ArgumentList $Rectangle.Left, $Rectangle.Top
+                $BottomRight = New-Object System.Management.Automation.Host.Coordinates -ArgumentList $Rectangle.Right, $Rectangle.Bottom
+                If ($Rectangle.Top -lt 0 -AND $Rectangle.LEft -lt 0) {
+                    Write-Warning "Window is minimized! Coordinates will not be accurate."
+                }
+                $Object = [pscustomobject]@{
+                    ProcessName = $ProcessName
+                    Size = $Size
+                    TopLeft = $TopLeft
+                    BottomRight = $BottomRight
+                }
+                $Object.PSTypeNames.insert(0,'System.Automation.WindowInfo')
+                $Object
+            }
+        }
+    }
+}
+
+# default screenshot area if no coordinates specified in the above user section
+if ($useMyOwnCoordinates -eq "No") {
+    $window = Get-Process | ? {$_.MainWindowTitle -like "World of Warcraft"} | Get-Window | select -First 1
+    $topleftX = [math]::floor($window.BottomRight.x / 3)
+    $topLeftY = 0
+    $bottomRightX = [math]::floor($topLeftX * 2)
+    $bottomRightY = [math]::floor($window.BottomRight.y / 3)
+}
+
 
 # Notification function
 function BGNotifier {

@@ -37,7 +37,7 @@ $delay = 20
 $stopOnQueue = "Yes"
 
 # Your Discord Channel Webhook. Put your own here.
-$discordWebHook = "https://discordapp.com/api/webhooks/659308345060229150/C61YEV - LOOKS SOMETHING LIKE THIS - 5Ksp-JHReb3dfsYJG8DWgUEtQpEunzGn7ysJ-Gx"
+$discordWebHook = "https://discordapp.com/api/webhooks/659308345060229150/Gt1YEVn2 - LOOKS SOMETHING LIKE THIS - Rzpn5Ksp-JHRebC2J0Gsdfasdfawer345agdgIJPgUEtQpEunzGn7ysJ-gR"
 
 
 #########################################
@@ -60,6 +60,7 @@ $null = [Windows.Storage.Streams.RandomAccessStream, Windows.Storage.Streams, Co
 function Get-Coords {
 
     $form.TopMost = $True
+    $script:label_coords_text.Enabled = $False
     $script:label_coords_text.Visible = $False
     $button_start.Visible = $False
     $label_status.Text = ""
@@ -71,35 +72,47 @@ function Get-Coords {
     $script:label_coords1.Visible = $True
     $script:label_coords2.Visible = $True
     $script:label_coords_text2.Visible = $True
+    $script:label_coords_text2.Enabled = $True
     $script:cancelLoop = $False
     $count = 1
 
-    While( $true ) {
-
-        If( ([System.Windows.Input.Keyboard]::IsKeyDown([System.Windows.Input.Key]::LeftShift)) -and ([System.Windows.Input.Keyboard]::IsKeyDown([System.Windows.Input.Key]::LeftCtrl)) -or ($script:cancelLoop) -or ($count -gt 2)) { 
+    :coord While( $true ) {
+        
+        If( (([System.Windows.Input.Keyboard]::IsKeyDown([System.Windows.Input.Key]::LeftShift)) -and ([System.Windows.Input.Keyboard]::IsKeyDown([System.Windows.Input.Key]::LeftCtrl))) -or ($script:cancelLoop) -or ($count -ge 3)) { 
             Break
         }
         If( [System.Windows.Forms.UserControl]::MouseButtons -ne "None" ) { 
           While( [System.Windows.Forms.UserControl]::MouseButtons -ne "None" ) { Start-Sleep -Milliseconds 100 }  ### Wait for the MOUSE UP event
         
             $mp = [Windows.Forms.Cursor]::Position
-            $X = [System.Windows.Forms.Cursor]::Position.X
-            $Y = [System.Windows.Forms.Cursor]::Position.Y
+
             if ($count -eq 1) {
                 $script:label_coords1.Text = "Top left: $($mp.ToString().Replace('{','').Replace('}',''))" 
                 $script:label_coords1.Refresh()
+                $count++
             }
-            if ($count -eq 2) {
+            elseif ($count -eq 2) {
                 $script:label_coords2.Text = "Bottom Right: $($mp.ToString().Replace('{','').Replace('}',''))"
                 $script:label_coords2.Refresh()
+                $count++
             }
-            $count++
+            if ($count -ge 3) {
+                Break coord
+            }
+            
             
         }
         [System.Windows.Forms.Application]::DoEvents()
         Start-Sleep -Milliseconds 100
+        
 
     }
+    #[System.Windows.Forms.Application]::DoEvents()
+    if (($script:cancelLoop) -or ($count -ge 3)) {
+        Return
+    }
+    
+
 }
 
 # Screenshot function
@@ -111,7 +124,7 @@ function Get-BGQueue {
 
     $graphics.CopyFromScreen($bounds.Location, [Drawing.Point]::Empty, $bounds.size)
 
-    $pic.Save("$path\wowImg.png")
+    $pic.Save("$path\BGNotifier_Img.png")
 
     $graphics.Dispose()
     $pic.Dispose()
@@ -252,7 +265,7 @@ function BGNotifier {
         }
 
         Get-BGQueue
-        $bgAlert = (Get-Ocr $path\wowImg.png).Text
+        $bgAlert = (Get-Ocr $path\BGNotifier_Img.png).Text
         
     }
     Until (($bgAlert -like "*Alterac*") -or ($bgAlert -like "*Warsong*") -or ($bgAlert -like "*Arathi*"))
@@ -382,7 +395,8 @@ $script:label_coords_text2.add_Click({
     $script:label_coords2.Refresh()
     $script:label_coords_text2.Visible = $False
     $script:label_coords_text.Visible = $True
-
+    $script:label_coords_text.Enabled = $True
+    $script:label_coords_text2.Enabled = $False
     $form.TopMost = $False
 })
 
@@ -424,10 +438,20 @@ $form.Controls.AddRange(($button_start,$button_stop,$label_status,$script:label_
 
 # Button methods
 $button_start.Add_Click({BGNotifier})
-$button_stop.Add_Click({$script:cancelLoop = $True})
+$button_stop.Add_Click({
+    if (Test-Path $path\BGNotifier_Img.png) {
+        Remove-Item $path\BGNotifier_Img.png -Force -Confirm:$False
+    }
+    $script:cancelLoop = $True
+})
 
 # catch close handle
-$form.add_FormClosing({$script:cancelLoop = $True})
+$form.add_FormClosing({
+    if (Test-Path $path\BGNotifier_Img.png) {
+        Remove-Item $path\BGNotifier_Img.png -Force -Confirm:$False
+    }
+    $script:cancelLoop = $True
+})
 
 # show the forms
 $form.ShowDialog()

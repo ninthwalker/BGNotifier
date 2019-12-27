@@ -8,7 +8,7 @@ Note: This does not interact with the game at any level or in any way.
 2. Powershell 3.0+ (Comes with WIN10)
 3. .Net Framework 3.5+ (Usually already on Windows 10 as well)
 4. A World of Warcraft Subscription. (You have to put this on your WIN 10 computer yourself)
-5. A discord account and discord app on your phone (Other apps/notifications possible in the future if requested)
+5. A Discord account and Discord app on your phone (Other apps/notifications possible in the future if requested)
 6. Probably a little computer/command line know-how. Or a C in Reading Comprehension 101 to follow the below instructions.
 
 ## How it works
@@ -16,9 +16,11 @@ It's super simple. It takes a screenshot of a specific area of your monitor (Whe
 It then uses Windows 10 Built-in OCR (Optical Character Recognition) to read the text in that screenshot to see if a BG has popped. If it has, it sends you a message on Discord. Too easy!
 
 ## How to use  
-After clicking the shortcut (Download Option One) or Lauching the Script from the command line (Download Option Two):
+Note: WoW Must be running in the foreground of your monitor.  
+After clicking the shortcut (Download Option One) or Lauching the Script from the command line (Download Option Two):  
+
 1. Click 'Start' to begin scanning for BG Queue's and notifying you.
-2. Click 'Stop' to halt the scanning and notifications.
+2. Click 'Stop' to halt scanning and notifications.
 3. ???
 4. Profit!  
   

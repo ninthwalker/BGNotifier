@@ -1,5 +1,5 @@
 # BGNotifier
-Sends a message when your World of Warcraft Battleground Queue has popped.
+Sends a message when your World of Warcraft Battleground Queue has popped.  
 Currently supports Discord. Possibly more notification methods to come in the future if requested.  
 Note: This does not interact with the game at any level or in any way.
 
@@ -53,12 +53,12 @@ If you right click and edit the BGNotifier.ps1 file you will see a section near 
 1. **Configure the X,Y Coordinates of your Battleground Queue window**      
 Everyones monitors are different, so we need to get your coordinate for where your BG Queue window pops up.  
 
-a. Open WoW and queue for a BG. Once a BG Queue pops, leave it up and go to step b.  
-b. Launch the BGNotifier app and click the 'Get Coords'.  
-c. The next 2 mouse clicks (approx) that you perform will be recorded into the window for you to get the X,Y coordinates.  
+i. Open WoW and queue for a BG. Once a BG Queue pops, leave it up and go to step b.  
+ii. Launch the BGNotifier app and click the 'Get Coords'.  
+iii. The next 2 mouse clicks (approx) that you perform will be recorded into the window for you to get the X,Y coordinates.  
 Your first click should be on the top left corner of the BG Queue window. Your second click should be on the bottom right of the BG Queue window. If you miss, or mess up, just click 'Exit Coords' in the app, and start again by clicking 'Get Coords'
-d. Keep the BGNotifier app open, write down, memorize (you're smart), or screenshot the BGNotifier window that has the Top Left and Bottom Right X,Y coordinates. You will need for the next step.
-e. Right click on the actual script file. (BGNotifier.ps1) and select Edit. This should open the script for editing. Enter in the coordinates created during step d into their respective sections.
+iiii. Keep the BGNotifier app open, write down, memorize (you're smart), or screenshot the BGNotifier window that has the Top Left and Bottom Right X,Y coordinates. You will need for the next step.
+iiiii. Right click on the actual script file. (BGNotifier.ps1) and select Edit. This should open the script for editing. Enter in the coordinates created during step d into their respective sections.
 
 2. **Screenshot Path**  
 Set the path to where you would like the temporary screenshot to be saved to.  
@@ -74,7 +74,7 @@ Default Value: 20 seconds, which should give you about 1 minute after you get th
 'Yes' will stop the script upon BG Queue detection. 'No' will have it continue to scan and must be stopped manually.  
 Default is 'Yes'
 
-5. Discord Webhook URL  
+5. **Discord Webhook URL**  
 Enter in the discord webhook for the channel you would like the notification to go to.  
 Discord > Click cogwheel next to a channel to edit it > Webhooks > Create webhook.
 See this quick video I found on Youtube if you need further help. It's very easy. Do not share this Webhook with anyone else.  

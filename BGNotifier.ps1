@@ -18,12 +18,32 @@ using namespace Windows.Graphics.Imaging
 ### REQUIRED SETTINGS ###
 #########################
 
+# One or more notifiaction apps are required. One or All of them can be used at the same time.
+# Set the notification app you want to use to '$True' to enable it or '$False' to disable it.
+# Then enter your webhook or API type tokens for the notification type you want to use.
+# All Notifications are set to $False by default.
+
+## DISCORD ##
+$discord = $False
 # Your Discord Channel Webhook. Put your own here.
-$discordWebHook = "https://discordapp.com/api/webhooks/659308345060229150/Gt1YEVn2 - LOOKS SOMETHING LIKE THIS - Rzpn5Ksp-JHRebC2J0Gsdfasdfawer345agdgIJPgUEtQpEunzGn7ysJ-gR"
+$discordWebHook = "https://discordapp.com/api/webhooks/4593 - EXAMPLE - EVn24sRzpn5KspJHRebCkldhsklrh2378rUIPG8DWgUEtQpEunzGn7ysJ-rT"
+
+## TELEGRAM ##
+$telegram = $False
+# Get the Token by creating a bot by messaging @BotFather
+$telegramBotToken = "96479117:BAH0 - EXAMPLE - yzTvrc6wUKLHKGYUyu34hm2zOgbQDBMu4"
+# Get the ChatID by messaging your bot you created, or making your own group with the bot and messaging the group. Then get the ChatID for that conversation with the below step.
+# Then go to this url replacing <telegramBotToken> with your own Bots token and look for the chatID to use. https://api.telegram.org/bot<telegramBotToken>/getUpdates
+$telegramChatID =  "-371-EXAMPLE-556032"
+
+## ALEXA NOTIFY ME SKILL ##
+$alexa = $False
+# Enter in the super long access code that the skill emailed you when you set it up in Alexa"
+$alexaAccessCode = "amzn1.ask.account.AEHQ4KJGYGIZ3ZZ - EXAMPLE - LMCMBLAHGKJHLIUHPIUHHTDOUDU567L72OXKPXXLVI568EJJVIHYO2DXGMPXPWZDLJKH678UFUYFJUHLIUG45684679GN2QQ7X23MGMHGGIAJSYG4U2SJIWUF3R5FUPDNPA5I"
 
 
 ### OPTIONAL ADVANCED SETTINGS ###
-#################################
+##################################
 
 # Coordinates of BG que window. Change these to your own if you want to customize the area of the screenshot.
 # Default settings are to screenshot the top middle of your wow window which should be good for most people, but not all
@@ -357,7 +377,7 @@ function BGNotifier {
         Return
     }
 
-    # Send msg to Discord
+    # set messages
     if ($bgAlert -like "*Alterac*") {
         $msg = "Your Alterac Valley Queue has Popped!"
     }
@@ -368,16 +388,34 @@ function BGNotifier {
         $msg = "Your Arathi Basin Queue has Popped!"
     }
 
-    $headers = @{
-        "Content-Type" = "application/json"
+    # msg Discord
+    if ($discord) {
+
+        $discordHeaders = @{
+            "Content-Type" = "application/json"
+        }
+
+        $discordBody = @{
+            content = $msg
+        } | convertto-json
+
+        Invoke-RestMethod -Uri $discordWebHook -Method POST -Headers $discordHeaders -Body $discordBody
     }
 
-    $body = @{
-        content = $msg
-    } | convertto-json
+    # msg Telegram
+    if ($telegram) {
+        Invoke-RestMethod -Uri "https://api.telegram.org/bot$($telegramBotToken)/sendMessage?chat_id=$($telegramChatID)&text=$($msg)"
+    }
 
-    # send msg and update status
-    Invoke-RestMethod -Uri $discordWebHook -Method POST -Headers $headers -Body $body
+    # msg Alexa
+    if ($alexa) {
+        $alexaBody = @{
+            notification = $msg
+            accessCode = $alexaAccessCode
+        } | ConvertTo-Json
+
+        Invoke-RestMethod https://api.notifymyecho.com/v1/NotifyMe -Method POST -Body $alexaBody
+    }
 
     if ($stopOnQueue -eq "Yes") {
         $label_status.ForeColor = "#FFFF00"

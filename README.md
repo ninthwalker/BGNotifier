@@ -73,10 +73,11 @@ This can be a little more complicated to set up, but you can look online for fur
 Set telegram to $True to enable this notification type.  
 Get the Token by creating a bot by messaging @BotFather  
 Get the ChatID by messaging your bot you created, or making your own group with the bot and messaging the group. Then get the ChatID for that conversation with the below step.  
-Go to this url replacing <telegramBotToken> with your own Bot's token and look for the chatID to use. 
-https://api.telegram.org/bot<telegramBotToken>/getUpdates
+Go to this url replacing [telegramBotToken] with your own Bot's token and look for the chatID to use. 
+https://api.telegram.org/bot[telegramBotToken]/getUpdates
 
 * **Alexa 'Notify Me' Skill**  
+Set alexa to $True to enable this notification type.  
 Enable the Skill inside the Alexa app. once linked it will email you an Access Code.  
 
 ### Optional/Advanced Settings:  

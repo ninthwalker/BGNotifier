@@ -1,16 +1,17 @@
 # BGNotifier  <img src="https://raw.githubusercontent.com/ninthwalker/BGNotifier/master/screenshots/mobile2.png">  
 Sends a message when your World of Warcraft Battleground Queue has popped.  
-Currently supports Discord. Possibly more notification methods to come in the future if requested.  
+Currently supports Discord, Telegram and the Alexa 'Notify Me' Skill. If you want another notification type, let me know.  
+  
 Note: This does not interact with the game at any level or in any way.  
 Note2: This is only for Classic for now. While it is easily modified to work for Retail, the queue's there are not that bad.
-Default settings should work for most people. Just throw in your Discord webhook and you are good to go!  
+Default settings should work for most people. Just set up at least one notification app and you are good to go!  
 
 ## Details/Requirements
 1. Windows 10
 2. Powershell 3.0+ (Comes with WIN10)
 3. .Net Framework 3.5+ (Usually already on Windows 10 as well)
 4. A World of Warcraft Subscription. (You have to put this on your WIN 10 computer yourself)
-5. A Discord account and Discord app on your phone (Other apps/notifications possible in the future if requested)
+5. Discord, Telegram, or Alexa Device. (Other apps/notifications possible in the future if requested)
 6. Probably a little computer/command line know-how. Or a C in Reading Comprehension 101 to follow the below instructions.
 
 ## How it works
@@ -52,15 +53,30 @@ Alternatively, set the execution policy to permanently allow powershell scripts:
 Some initial configuration is required before it will work for you.  
 If you right click and edit the BGNotifier.ps1 file you will see a section near the top that requires you to enter your own settings.
 
-**Note: The only required setting to make thuis work is your Discord webhook.**  
-The other settings are optional/advanced.  
+**Note: The only required setting to make this work is to set up one notification webhook/API Token.**  
+Currently supported Notification apps are: Discord, Telegram , Alexa 'Notify Me' Skill  
 
 ### Required Setting:  
-1. **Discord Webhook URL**  
+At least one is required. or you can set up all 3 if you want!  
+
+* **Discord Webhook URL**  
+Set discord to $True to enable this notification type.
 Enter in the discord webhook for the channel you would like the notification to go to.  
 Discord > Click cogwheel next to a channel to edit it > Webhooks > Create webhook.
 See this quick video I found on Youtube if you need further help. It's very easy. Do not share this Webhook with anyone else.  
 [Create Discord Webhook](https://www.youtube.com/watch?v=zxi926qhP7w)  
+
+
+* **Telegram Bot**
+This can be a little more complicated to set up, but you can look online for further help. The basics are below but I didn't go into detail:  
+Set telegram to $True to enable this notification type.  
+Get the Token by creating a bot by messaging @BotFather  
+Get the ChatID by messaging your bot you created, or making your own group with the bot and messaging the group. Then get the ChatID for that conversation with the below step.  
+Go to this url replacing <telegramBotToken> with your own Bot's token and look for the chatID to use. 
+https://api.telegram.org/bot<telegramBotToken>/getUpdates
+
+* **Alexa 'Notify Me' Skill**  
+Enable the Skill inside the Alexa app. once linked it will email you an Access Code.  
 
 ### Optional/Advanced Settings:  
 

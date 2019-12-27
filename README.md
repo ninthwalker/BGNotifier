@@ -50,7 +50,7 @@ Alternatively, set the execution policy to permanently allow powershell scripts:
 Some initial configuration is required before it will work for you.  
 If you right click and edit the BGNotifier.ps1 file you will see a section near the top that requires you to enter your own settings.
 
-1. Configure the X,Y Coordinates of your Battleground Queue window    
+1. **Configure the X,Y Coordinates of your Battleground Queue window**      
 Everyones monitors are different, so we need to get your coordinate for where your BG Queue window pops up.  
 
 a. Open WoW and queue for a BG. Once a BG Queue pops, leave it up and go to step b.  
@@ -60,18 +60,18 @@ Your first click should be on the top left corner of the BG Queue window. Your s
 d. Keep the BGNotifier app open, write down, memorize (you're smart), or screenshot the BGNotifier window that has the Top Left and Bottom Right X,Y coordinates. You will need for the next step.
 e. Right click on the actual script file. (BGNotifier.ps1) and select Edit. This should open the script for editing. Enter in the coordinates created during step d into their respective sections.
 
-2. Screenshot Path  
+2. **Screenshot Path**  
 Set the path to where you would like the temporary screenshot to be saved to.  
 By default it goes to C:\temp\  
 
-3. Screenshot Delay  
+3. **Screenshot Delay**  
 If you would like to change how often the script scans for the Battleground Queue Window you can enter a different time here in seconds.
 Note: this script uses hardly any resources and is very quick at the screenshot/OCR process. Keep in mind you have 1.5min to accept the Queue. And this script needs to see the popup, and send the notification.  
 Then you have to get off the toilet and make it back to your computer in time. Food for thought.  
 Default Value: 20 seconds, which should give you about 1 minute after you get the notification to make it back to accept the Queue.  
   
-4. Stop on Queue  
-Set to Yes or No. 'Yes' will stop the script upon BG Queue detection. 'No' will have it continue to scan and must be stopped manually.  
+4. **Stop on Queue**  
+'Yes' will stop the script upon BG Queue detection. 'No' will have it continue to scan and must be stopped manually.  
 Default is 'Yes'
 
 5. Discord Webhook URL  

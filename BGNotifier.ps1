@@ -81,7 +81,10 @@ function Get-Coords {
             Break
         }
         If( [System.Windows.Forms.UserControl]::MouseButtons -ne "None" ) { 
-          While( [System.Windows.Forms.UserControl]::MouseButtons -ne "None" ) { Start-Sleep -Milliseconds 100 }  ### Wait for the MOUSE UP event
+          While( [System.Windows.Forms.UserControl]::MouseButtons -ne "None" ) {
+            Start-Sleep -Milliseconds 100 # Wait for the MOUSE UP event
+            [System.Windows.Forms.Application]::DoEvents()
+          }
         
             $mp = [Windows.Forms.Cursor]::Position
 

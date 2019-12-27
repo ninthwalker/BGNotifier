@@ -10,7 +10,6 @@
 using namespace Windows.Storage
 using namespace Windows.Graphics.Imaging
 
-
 ##########################################
 ### CHANGE THESE SETTINGS TO YOUR OWN! ###
 ##########################################

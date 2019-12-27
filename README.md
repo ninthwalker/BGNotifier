@@ -17,7 +17,7 @@ It then uses Windows 10 Built-in OCR (Optical Character Recognition) to read the
 
 ## How to use  
 Prereq's: WoW Must be running in the foreground of your monitor. Discord App on your computer must *not* be running. (Discord does not send mobile notifications if you are using a Discord app on your computer)  
-After clicking the shortcut (Download Option One) or Lauching the Script from the command line (Download Option Two):  
+After clicking the shortcut (Download Option One) or Lauching the script from the command line (Download Option Two):  
 
 1. Click 'Start' to begin scanning for BG Queue's and notifying you.
 2. Click 'Stop' to halt scanning and notifications.
@@ -33,7 +33,7 @@ After clicking the shortcut (Download Option One) or Lauching the Script from th
 2 . You may need to 'unblock' the zip file downloaded. This is normal behavior for Microsoft Windows to do for files downloaded from the internet.  
 `Right click > Properties > Check 'Unblock'`
 3. Extract the contents of the ZIP file. You only need the 'BGNotifier.lnk' shortcut, and the BGNotifier.ps1 files. Make sure these 2 files are kept in the same directory wherever you move them to.  
-4. Once Setup is completed, you can double click the shortcut to run the Battleground Notifier script.  
+4. Once Setup is completed, you can double click the shortcut to run the BG Notifier script.  
 
 **Option Two**  
 (For those will some Powershell experience, or if you don't want to use the shortcut method above)
@@ -55,9 +55,9 @@ Everyones monitors are different, so we need to get your coordinate for where yo
 
 a. Open WoW and queue for a BG. Once a BG Queue pops, leave it up and go to step b.  
 b. Launch the BGNotifier app and click the 'Get Coords'.  
-c. The next 2 mouse clicks that you perform will be recorded into the window for you to get the X,Y coordinates.  
+c. The next 2 mouse clicks (approx) that you perform will be recorded into the window for you to get the X,Y coordinates.  
 Your first click should be on the top left corner of the BG Queue window. Your second click should be on the bottom right of the BG Queue window. If you miss, or mess up, just click 'Exit Coords' in the app, and start again by clicking 'Get Coords'
-d. Keep the BGNotifier app open, Write down, memorize (you're smart), or screenshot the BGNotifier window that has the Top Left and Bottom Right X,Y coordinates. You will need for the next step.
+d. Keep the BGNotifier app open, write down, memorize (you're smart), or screenshot the BGNotifier window that has the Top Left and Bottom Right X,Y coordinates. You will need for the next step.
 e. Right click on the actual script file. (BGNotifier.ps1) and select Edit. This should open the script for editing. Enter in the coordinates created during step d into their respective sections.
 
 2. Screenshot Path  

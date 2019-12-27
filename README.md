@@ -83,7 +83,7 @@ See this quick video I found on Youtube if you need further help. It's very easy
 
 ## Screenshots & Videos  
 
-<img src="https://raw.githubusercontent.com/ninthwalker/BGNotifier/master/screenshots/mobile.png" width="250">  
+<img src="https://raw.githubusercontent.com/ninthwalker/BGNotifier/master/screenshots/mobile.png" width="400">  
 
 ![](https://raw.githubusercontent.com/ninthwalker/BGNotifier/master/screenshots/start.png)  
 

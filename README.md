@@ -1,4 +1,4 @@
-# BGNotifier
+# BGNotifier  <img src="https://raw.githubusercontent.com/ninthwalker/BGNotifier/master/screenshots/mobile2.png">  
 Sends a message when your World of Warcraft Battleground Queue has popped.  
 Currently supports Discord. Possibly more notification methods to come in the future if requested.  
 Note: This does not interact with the game at any level or in any way.

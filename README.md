@@ -87,13 +87,8 @@ See this quick video I found on Youtube if you need further help. It's very easy
 
 ![](https://raw.githubusercontent.com/ninthwalker/BGNotifier/master/screenshots/start.png) ![](https://raw.githubusercontent.com/ninthwalker/BGNotifier/master/screenshots/stop.png)  
 
-![](https://raw.githubusercontent.com/ninthwalker/BGNotifier/master/screenshots/coords.png)  
-
-![](https://raw.githubusercontent.com/ninthwalker/BGNotifier/master/screenshots/popped.png)  
+![](https://raw.githubusercontent.com/ninthwalker/BGNotifier/master/screenshots/coords.png) ![](https://raw.githubusercontent.com/ninthwalker/BGNotifier/master/screenshots/popped.png)  
 
 ![](https://raw.githubusercontent.com/ninthwalker/BGNotifier/master/screenshots/av.png)  
 
 ![](https://raw.githubusercontent.com/ninthwalker/BGNotifier/master/screenshots/files.png)  
-
-
-

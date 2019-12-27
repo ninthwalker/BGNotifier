@@ -1,7 +1,8 @@
 # BGNotifier  <img src="https://raw.githubusercontent.com/ninthwalker/BGNotifier/master/screenshots/mobile2.png">  
 Sends a message when your World of Warcraft Battleground Queue has popped.  
 Currently supports Discord. Possibly more notification methods to come in the future if requested.  
-Note: This does not interact with the game at any level or in any way.
+Note: This does not interact with the game at any level or in any way.  
+Note2: This is only for Classic for now. While it is easily modified to work for Retail, the queue's there are not that bad.
 
 ## Details/Requirements
 1. Windows 10

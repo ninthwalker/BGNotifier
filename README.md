@@ -53,12 +53,12 @@ If you right click and edit the BGNotifier.ps1 file you will see a section near 
 1. **Configure the X,Y Coordinates of your Battleground Queue window**      
 Everyones monitors are different, so we need to get your coordinate for where your BG Queue window pops up.  
 
-i. Open WoW and queue for a BG. Once a BG Queue pops, leave it up and go to step b.  
-ii. Launch the BGNotifier app and click the 'Get Coords'.  
-iii. The next 2 mouse clicks (approx) that you perform will be recorded into the window for you to get the X,Y coordinates.  
+  a. Open WoW and queue for a BG. Once a BG Queue pops, leave it up and go to step b.  
+  b. Launch the BGNotifier app and click the 'Get Coords'.  
+  c. The next 2 mouse clicks (approx) that you perform will be recorded into the window for you to get the X,Y coordinates.  
 Your first click should be on the top left corner of the BG Queue window. Your second click should be on the bottom right of the BG Queue window. If you miss, or mess up, just click 'Exit Coords' in the app, and start again by clicking 'Get Coords'
-iiii. Keep the BGNotifier app open, write down, memorize (you're smart), or screenshot the BGNotifier window that has the Top Left and Bottom Right X,Y coordinates. You will need for the next step.
-iiiii. Right click on the actual script file. (BGNotifier.ps1) and select Edit. This should open the script for editing. Enter in the coordinates created during step d into their respective sections.
+  d. Keep the BGNotifier app open, write down, memorize (you're smart), or screenshot the BGNotifier window that has the Top Left and Bottom Right X,Y coordinates. You will need for the next step.  
+  e. Right click on the actual script file. (BGNotifier.ps1) and select Edit. This should open the script for editing. Enter in the coordinates created during step d into their respective sections.
 
 2. **Screenshot Path**  
 Set the path to where you would like the temporary screenshot to be saved to.  

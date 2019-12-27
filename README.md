@@ -84,12 +84,17 @@ See this quick video I found on Youtube if you need further help. It's very easy
 ## Screenshots & Videos
 Note: Need to add still
 
-![](https://raw.githubusercontent.com/ninthwalker/BattlegroundNotifier/master/screenshots/-.png)  
+![](https://raw.githubusercontent.com/ninthwalker/BGNotifier/master/screenshots/mobile.png)  
 
-![](https://raw.githubusercontent.com/ninthwalker/BattlegroundNotifier/master/screenshots/-png)  
+![](https://raw.githubusercontent.com/ninthwalker/BGNotifier/master/screenshots/start.png)  
 
-![](https://raw.githubusercontent.com/ninthwalker/BattlegroundNotifier/master/screenshots/-.png)  
+![](https://raw.githubusercontent.com/ninthwalker/BGNotifier/master/screenshots/stop.png)  
 
-![](https://raw.githubusercontent.com/ninthwalker/BattlegroundNotifier/master/screenshots/-.png)  
+![](https://raw.githubusercontent.com/ninthwalker/BGNotifier/master/screenshots/coords.png)  
 
-![](https://raw.githubusercontent.com/ninthwalker/BattlegroundNotifier/master/screenshots/-.png)
+![](https://raw.githubusercontent.com/ninthwalker/BGNotifier/master/screenshots/av.png)  
+
+![](https://raw.githubusercontent.com/ninthwalker/BGNotifier/master/screenshots/files.png)  
+
+![](https://raw.githubusercontent.com/ninthwalker/BGNotifier/master/screenshots/popped.png) 
+

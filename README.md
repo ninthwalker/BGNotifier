@@ -85,9 +85,7 @@ See this quick video I found on Youtube if you need further help. It's very easy
 
 <img src="https://raw.githubusercontent.com/ninthwalker/BGNotifier/master/screenshots/mobile.png" width="400">  
 
-![](https://raw.githubusercontent.com/ninthwalker/BGNotifier/master/screenshots/start.png)  
-
-![](https://raw.githubusercontent.com/ninthwalker/BGNotifier/master/screenshots/stop.png)  
+![](https://raw.githubusercontent.com/ninthwalker/BGNotifier/master/screenshots/start.png) ![](https://raw.githubusercontent.com/ninthwalker/BGNotifier/master/screenshots/stop.png)  
 
 ![](https://raw.githubusercontent.com/ninthwalker/BGNotifier/master/screenshots/coords.png)  
 

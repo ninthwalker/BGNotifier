@@ -55,14 +55,14 @@ If you right click and edit the BGNotifier.ps1 file you will see a section near 
 **Note: The only required setting to make thuis work is your Discord webhook.**  
 The other settings are optional/advanced.  
 
-# Required Setting:  
+### Required Setting:  
 1. **Discord Webhook URL**  
 Enter in the discord webhook for the channel you would like the notification to go to.  
 Discord > Click cogwheel next to a channel to edit it > Webhooks > Create webhook.
 See this quick video I found on Youtube if you need further help. It's very easy. Do not share this Webhook with anyone else.  
 [Create Discord Webhook](https://www.youtube.com/watch?v=zxi926qhP7w)  
 
-# Optional/Advanced Settings:  
+### Optional/Advanced Settings:  
 
 1. **Configure your own X,Y Coordinates of your Battleground Queue window**      
 Everyones monitors are different, so just in case the default screenshot area does not work for you, you can specify your own. 

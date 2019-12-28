@@ -41,6 +41,17 @@ $alexa = $False
 # Enter in the super long access code that the skill emailed you when you set it up in Alexa"
 $alexaAccessCode = "amzn1.ask.account.AEHQ4KJGYGIZ3ZZ - EXAMPLE - LMCMBLAHGKJHLIUHPIUHHTDOUDU567L72OXKPXXLVI568EJJVIHYO2DXGMPXPWZDLJKH678UFUYFJUHLIUG45684679GN2QQ7X23MGMHGGIAJSYG4U2SJIWUF3R5FUPDNPA5I"
 
+## HOME ASSISTANT ##
+# This is probably way more advanced than most people will use, but it's here for those that want it.
+# I personally use this so my alexa devices will announce that the battleground is ready.
+$HASS = $False
+# Your Home Assistant base url and port. ie: 
+$hassURL = "http://192.168.1.20:8123"
+# token from Home Assistant
+$hassToken = "eyJ0eXAiO - EXAMPLE - iMGDJKOPHRDCMLHHJK8GHGHtyutdiZ.nC15fj0dBr7MRPqee2Dj_eQSS5rLPfdYhjhgljhg34df32f2fgerKHJVmhOi9U"
+# entity_id of the script you want to have execute (ie: script.2469282367234)
+$entity_ID = "script.15372345285"
+
 
 ### OPTIONAL ADVANCED SETTINGS ###
 ##################################
@@ -417,6 +428,20 @@ function BGNotifier {
         Invoke-RestMethod https://api.notifymyecho.com/v1/NotifyMe -Method POST -Body $alexaBody
     }
 
+    if ($HASS) {
+    
+        $hassHeaders = @{
+            "Content-Type" = "application/json"
+            "Authorization"= "Bearer $hassToken"
+        }
+
+        $hassBody = @{
+            "entity_id" = $entity_ID
+        } | convertto-json
+
+        Invoke-RestMethod -Uri "$hassURL/api/services/script/toggle" -Method POST -Headers $hassHeaders -Body $hassBody
+    }
+    
     if ($stopOnQueue -eq "Yes") {
         $label_status.ForeColor = "#FFFF00"
         $label_status.text = "Your Queue Popped!"

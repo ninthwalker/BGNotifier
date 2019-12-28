@@ -80,7 +80,7 @@ https://api.telegram.org/bot[telegramBotToken]/getUpdates
 Set alexa to $True to enable this notification type.  
 Enable the Skill inside the Alexa app. once linked it will email you an Access Code.  
 
-* **HOME ASSISTANT** 
+* **Home Assistant** 
 This is probably way more advanced than most people will use, but it's here for those that want it.  
 I personally use this so my Alexa devices will announce that the Battleground is ready.  
 Set HASS to $True  

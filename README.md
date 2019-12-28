@@ -1,6 +1,6 @@
 # BGNotifier  <img src="https://raw.githubusercontent.com/ninthwalker/BGNotifier/master/screenshots/mobile2.png">  
 Sends a message when your World of Warcraft Battleground Queue has popped.  
-Currently supports Discord, Telegram and the Alexa 'Notify Me' Skill. If you want another notification type, let me know.  
+Currently supports Discord, Telegram, The Alexa 'Notify Me' Skill and Home Assistant scripts. If you want another notification type, let me know.  
   
 Note: This does not interact with the game at any level or in any way.  
 Note2: This is only for Classic for now. While it is easily modified to work for Retail, the queue's there are not that bad.
@@ -58,7 +58,7 @@ If you right click and edit the BGNotifier.ps1 file you will see a section near 
 Currently supported Notification apps are: Discord, Telegram , Alexa 'Notify Me' Skill  
 
 ### Required Setting:  
-At least one of the below notification types is required. Or you can set up all 3 if you want!  
+At least one of the below notification types is required. Or you can set up all 4 if you want!  
 
 * **Discord Webhook URL**  
 Set discord to $True to enable this notification type.
@@ -80,7 +80,7 @@ https://api.telegram.org/bot[telegramBotToken]/getUpdates
 Set alexa to $True to enable this notification type.  
 Enable the Skill inside the Alexa app. once linked it will email you an Access Code.  
 
-* **Home Assistant** 
+* **Home Assistant**  
 This is probably way more advanced than most people will use, but it's here for those that want it.  
 I personally use this so my Alexa devices will announce that the Battleground is ready.  
 Set HASS to $True  

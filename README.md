@@ -4,6 +4,7 @@
 Sends a message when your World of Warcraft Battleground Queue has popped.  
 Currently supports Discord, Telegram, The Alexa 'Notify Me' Skill and Home Assistant scripts. If you want another notification type, let me know.  
   
+  
 Note: This does not interact with the game at any level or in any way.  
 Note2: This is only for Classic for now. While it is easily modified to work for Retail, the queue's there are not that bad.
 Default settings should work for most people. Just set up at least one notification app and you are good to go!  

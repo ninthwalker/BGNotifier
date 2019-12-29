@@ -63,6 +63,11 @@ Currently supported Notification apps are: Discord, Telegram , Alexa 'Notify Me'
 ### Required Setting:  
 At least one of the below notification types is required. Or you can set up all 4 if you want!  
 
+* **Pushover.Net Webhook URL** 
+Set pushover to $True to enable this notification type
+Log in and create a new application in your Pushover.net account
+Copy the User API Key and the newly created Application API Key to the Pushover variables
+
 * **Discord Webhook URL**  
 Set discord to $True to enable this notification type.
 Enter in the discord webhook for the channel you would like the notification to go to.  

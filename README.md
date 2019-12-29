@@ -1,4 +1,4 @@
-<img src="https://raw.githubusercontent.com/ninthwalker/BGNotifier/master/screenshots/BGNotifier-logo.png">  
+<img src="https://raw.githubusercontent.com/ninthwalker/BGNotifier/master/screenshots/BGNotifier-logo.png" width="400">  
 
 # BGNotifier  <img src="https://raw.githubusercontent.com/ninthwalker/BGNotifier/master/screenshots/mobile2.png">  
 Sends a message when your World of Warcraft Battleground Queue has popped.  

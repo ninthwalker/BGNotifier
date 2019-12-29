@@ -23,6 +23,16 @@ using namespace Windows.Graphics.Imaging
 # Then enter your webhook or API type tokens for the notification type you want to use.
 # All Notifications are set to $False by default.
 
+## PUSHOVER ##
+$pushover = $False
+$pushoverAppToken = "GetFromPushoverDotNet"
+$pushoverUserToken = "GetFromPushoverDotNet"
+
+#$Device = "Device"
+#$Title = "Title"
+#$Priority = "Priority"
+#$Sound = "Sound"
+
 ## DISCORD ##
 $discord = $False
 # Your Discord Channel Webhook. Put your own here.
@@ -397,6 +407,22 @@ function BGNotifier {
     }
     elseif ($bgAlert -like "*Arathi*") {
         $msg = "Your Arathi Basin Queue has Popped!"
+    }
+
+	# msg Pushover
+    if ($pushover) {
+        $data = @{
+            token = "$pushoverAppToken";
+            user = "$pushoverUserToken";
+            message = "$msg"
+        }
+        
+        if ($Device) { $data.Add("device", "$Device") }
+        if ($Title) { $data.Add("title", "$Title") }
+        if ($Priority) { $data.Add("priority", $Priority) }
+        if ($Sound) { $data.Add("sound", "$Sound") }
+
+        Invoke-RestMethod -Method Post -Uri "https://api.pushover.net/1/messages.json" -Body $data | Out-Null
     }
 
     # msg Discord

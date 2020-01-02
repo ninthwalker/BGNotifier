@@ -61,12 +61,7 @@ If you right click and edit the BGNotifier.ps1 file you will see a section near 
 Currently supported Notification apps are: Discord, Telegram , Alexa 'Notify Me' Skill  
 
 ### Required Setting:  
-At least one of the below notification types is required. Or you can set up all 4 if you want!  
-
-* **Pushover.Net Webhook URL** 
-Set pushover to $True to enable this notification type
-Log in and create a new application in your Pushover.net account
-Copy the User API Key and the newly created Application API Key to the Pushover variables
+At least one of the below notification types is required. Or you can set up all 5 if you want!  
 
 * **Discord Webhook URL**  
 Set discord to $True to enable this notification type.
@@ -75,8 +70,13 @@ Discord > Click cogwheel next to a channel to edit it > Webhooks > Create webhoo
 See this quick video I found on Youtube if you need further help. It's very easy. Do not share this Webhook with anyone else.  
 [Create Discord Webhook](https://www.youtube.com/watch?v=zxi926qhP7w)  
 
+* **Pushover.Net Webhook URL**  
+Set pushover to $True to enable this notification type
+Log in and create a new application in your Pushover.net account
+Copy the User API Key and the newly created Application API Key to the Pushover variables  
+Set the optional commented out settings if desired.  
 
-* **Telegram Bot**
+* **Telegram Bot**  
 This can be a little more complicated to set up, but you can look online for further help. The basics are below but I didn't go into detail:  
 Set telegram to $True to enable this notification type.  
 Get the Token by creating a bot by messaging @BotFather  
@@ -121,6 +121,10 @@ Default Value: 20 seconds, which should give you about 1 minute after you get th
 4. **Stop on Queue**  
 'Yes' will stop the script upon BG Queue detection. 'No' will have it continue to scan and must be stopped manually.  
 Default is 'Yes'  
+
+## FAQ/Common Issues  
+1. As noted above, this app is entirely legal/safe/conforms to all TOS of Blizzard and World of Warcraft. This does not touch the game or files in any way.  
+2. Some of you may not have a C:\temp directory which is the default for where the screenshot is saved. If this is the case, either create the c:\temp folder on your computer, or modify the path to your own location in the advanced settings section of the script.
 
 ## Screenshots & Videos  
 

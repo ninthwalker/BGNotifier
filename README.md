@@ -75,6 +75,7 @@ Set pushover to $True to enable this notification type
 Log in and create a new application in your Pushover.net account
 Copy the User API Key and the newly created Application API Key to the Pushover variables  
 Set the optional commented out settings if desired.  
+(Thanks to @pattont for this Notification Type)    
 
 * **Telegram Bot**  
 This can be a little more complicated to set up, but you can look online for further help. The basics are below but I didn't go into detail:  

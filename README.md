@@ -2,7 +2,7 @@
 <img align="center" src="https://raw.githubusercontent.com/ninthwalker/BGNotifier/master/screenshots/BGNotifier-logo.png" width="250"></p>
 <img src="https://raw.githubusercontent.com/ninthwalker/BGNotifier/master/screenshots/mobile2.png"> 
 Sends a message when your World of Warcraft Battleground Queue has popped.  
-Currently supports Discord, Telegram, The Alexa 'Notify Me' Skill and Home Assistant scripts. If you want another notification type, let me know.  
+Currently supports Discord, Telegram, Alexa 'Notify Me' Skill, Home Assistant scripts and Pushover (Thanks @pattont). If you want another notification type, let me know.  
   
   
 Note: This does not interact with the game at any level or in any way.  

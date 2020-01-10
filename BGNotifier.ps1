@@ -1,10 +1,10 @@
 #####################################################################
 # Name: BGNotifier                                                  #
-# Desc: Notifies you if a WoW Battleground Queue has popped.        #
+# Desc: Notifies you if a Classic WoW Battleground Queue has popped #
 # Author: Ninthwalker                                               #
 # Instructions: https://github.com/ninthwalker/BGNotifier           #
-# Date: 25DEC2019 *Merry Christmas!*                                #
-# Version: 1.0                                                      #
+# Date: 10JAN2020 *Happy New Year!*                                 #
+# Version: 1.1                                                      #
 #####################################################################
 
 using namespace Windows.Storage
@@ -68,7 +68,7 @@ $entity_ID = "script.15372345285"
 ##################################
 
 # Coordinates of BG que window. Change these to your own if you want to customize the area of the screenshot.
-# Default settings are to screenshot the top middle of your wow window which should be good for most people, but not all
+# Default settings are to screenshot the top middle of your wow window which should be good for most people, but not all.
 # See Instructions on the Github page or use the 'Get Coords' within the app to find the area you want to scan for the BG Queue window.
 # Change '$useMyOwnCoordinates' to "Yes" and set the coordinates to use your own.
 $useMyOwnCoordinates = "No"

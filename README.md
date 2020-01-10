@@ -57,7 +57,7 @@ Some initial configuration is required before it will work for you.
 If you right click and edit the BGNotifier.ps1 file you will see a section near the top that requires you to enter your own settings.
 
 **Note: The only required setting to make this work is to set up one notification type.**  
-Currently supported Notification apps are: Discord, Telegram, Pushover, Home Assistantand the Alexa 'Notify Me' Skill.  
+Currently supported Notification apps are: Discord, Telegram, Pushover, Home Assistant and the Alexa 'Notify Me' Skill.  
 
 ### Required Setting:  
 At least one of the below notification types is required. Or you can set up all 5 if you want!  
@@ -70,9 +70,9 @@ See this quick video I found on Youtube if you need further help. It's very easy
 [Create Discord Webhook](https://www.youtube.com/watch?v=zxi926qhP7w)  
 
 * **Pushover.Net Webhook URL**  
-Set pushover to $True to enable this notification type
-Log in and create a new application in your Pushover.net account
-Copy the User API Key and the newly created Application API Key to the Pushover variables  
+Set pushover to $True to enable this notification type.  
+Log in and create a new application in your Pushover.net account.  
+Copy the User API Key and the newly created Application API Key to the Pushover variables.  
 Set the optional commented out settings if desired.  
 (Thanks to @pattont for this Notification Type)    
 

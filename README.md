@@ -57,7 +57,7 @@ Some initial configuration is required before it will work for you.
 If you right click and edit the BGNotifier.ps1 file you will see a section near the top that requires you to enter your own settings.
 
 **Note: The only required setting to make this work is to set up one notification type.**  
-Currently supported Notification apps are: Discord, Telegram , Alexa 'Notify Me' Skill  
+Currently supported Notification apps are: Discord, Telegram, Pushover, Home Assistantand the Alexa 'Notify Me' Skill.  
 
 ### Required Setting:  
 At least one of the below notification types is required. Or you can set up all 5 if you want!  

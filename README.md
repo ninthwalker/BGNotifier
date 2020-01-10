@@ -14,8 +14,7 @@ Default settings should work for most people. Just set up at least one notificat
 2. Powershell 3.0+ (Comes with WIN10)
 3. .Net Framework 3.5+ (Usually already on Windows 10 as well)
 4. A World of Warcraft Subscription. (You have to put this on your WIN 10 computer yourself)
-5. Discord, Telegram, or Alexa Device. (Other apps/notifications possible in the future if requested)
-6. Probably a little computer/command line know-how. Or a C in Reading Comprehension 101 to follow the below instructions.
+5. Discord, Telegram, Pushover or Alexa Device. (Other apps/notifications possible in the future if requested)  
 
 ## How it works
 It's super simple. It takes a screenshot of a specific area of your monitor (Where the BG Queue window pops up).  
@@ -125,7 +124,8 @@ Default is 'Yes'
 
 ## FAQ/Common Issues  
 1. As noted above, this app is entirely legal/safe/conforms to all TOS of Blizzard and World of Warcraft. This does not touch the game or files in any way.  
-2. Some of you may not have a C:\temp directory which is the default for where the screenshot is saved. If this is the case, either create the c:\temp folder on your computer, or modify the path to your own location in the advanced settings section of the script.
+2. Some of you may not have a C:\temp directory which is the default for where the screenshot is saved. If this is the case, either create the c:\temp folder on your computer, or modify the path to your own location in the advanced settings section of the script.  
+3. make sure you have double quotes around your app webhooks in the script. "webhook here"  
 
 ## Screenshots & Videos  
 

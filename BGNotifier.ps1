@@ -23,16 +23,6 @@ using namespace Windows.Graphics.Imaging
 # Then enter your webhook or API type tokens for the notification type you want to use.
 # All Notifications are set to $False by default.
 
-## PUSHOVER ##
-$pushover = $False
-$pushoverAppToken = "GetFromPushoverDotNet"
-$pushoverUserToken = "GetFromPushoverDotNet"
-
-#$Device = "Device"
-#$Title = "Title"
-#$Priority = "Priority"
-#$Sound = "Sound"
-
 ## DISCORD ##
 $discord = $False
 # Your Discord Channel Webhook. Put your own here.
@@ -45,6 +35,17 @@ $telegramBotToken = "96479117:BAH0 - EXAMPLE - yzTvrc6wUKLHKGYUyu34hm2zOgbQDBMu4
 # Get the ChatID by messaging your bot you created, or making your own group with the bot and messaging the group. Then get the ChatID for that conversation with the below step.
 # Then go to this url replacing <telegramBotToken> with your own Bots token and look for the chatID to use. https://api.telegram.org/bot<telegramBotToken>/getUpdates
 $telegramChatID =  "-371-EXAMPLE-556032"
+
+## PUSHOVER ##
+$pushover = $False
+$pushoverAppToken = "GetFromPushoverDotNet"
+$pushoverUserToken = "GetFromPushoverDotNet"
+
+# optional Pushover settings. Uncomment and set if wanted.
+#$device = "Device"
+#$title = "Title"
+#$priority = "Priority"
+#$sound = "Sound"
 
 ## ALEXA NOTIFY ME SKILL ##
 $alexa = $False
@@ -409,22 +410,6 @@ function BGNotifier {
         $msg = "Your Arathi Basin Queue has Popped!"
     }
 
-	# msg Pushover
-    if ($pushover) {
-        $data = @{
-            token = "$pushoverAppToken";
-            user = "$pushoverUserToken";
-            message = "$msg"
-        }
-        
-        if ($Device) { $data.Add("device", "$Device") }
-        if ($Title) { $data.Add("title", "$Title") }
-        if ($Priority) { $data.Add("priority", $Priority) }
-        if ($Sound) { $data.Add("sound", "$Sound") }
-
-        Invoke-RestMethod -Method Post -Uri "https://api.pushover.net/1/messages.json" -Body $data | Out-Null
-    }
-
     # msg Discord
     if ($discord) {
 
@@ -442,6 +427,22 @@ function BGNotifier {
     # msg Telegram
     if ($telegram) {
         Invoke-RestMethod -Uri "https://api.telegram.org/bot$($telegramBotToken)/sendMessage?chat_id=$($telegramChatID)&text=$($msg)"
+    }
+    
+    # msg Pushover
+    if ($pushover) {
+        $data = @{
+            token = "$pushoverAppToken"
+            user = "$pushoverUserToken"
+            message = "$msg"
+        }
+        
+        if ($device) { $data.Add("device", "$device") }
+        if ($title) { $data.Add("title", "$title") }
+        if ($priority) { $data.Add("priority", $priority) }
+        if ($sound) { $data.Add("sound", "$sound") }
+
+        Invoke-RestMethod "https://api.pushover.net/1/messages.json" -Method POST -Body $data
     }
 
     # msg Alexa

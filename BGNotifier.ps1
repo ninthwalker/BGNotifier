@@ -17,7 +17,7 @@
 # Added in tls1.2 enforcement (Telegram changed in FEB2020)         #
 # Added in Disconnect alert option                                  #
 # Changed default screenshot area to be middle top half of screen   #
-# Changed defalth path for screenshot to save to $env:temp          #
+# Changed default path for screenshot to save to $env:temp          #
 #####################################################################
 
 using namespace Windows.Storage
@@ -132,10 +132,6 @@ $notifyOnDisconnect = $True
 if ($textMsg) {
     [SecureString]$secureEmailPass = $emailPass | ConvertTo-SecureString -AsPlainText -Force 
     [PSCredential]$emailCreds = New-Object System.Management.Automation.PSCredential -ArgumentList $emailUser, $secureEmailPass
-}
-
-if ($notifyOnDisconnect) {
-    $disconnected = "disconnected"
 }
 
 # Screenshot method
@@ -288,8 +284,7 @@ function Get-Ocr {
             # https://docs.microsoft.com/en-us/windows/uwp/audio-video-camera/imaging#save-a-softwarebitmap-to-a-file-with-bitmapencoder
 
             # .Net method needs a full path, or at least might not have the same relative path root as PowerShell
-            $p = $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPS
-            ($p)
+            $p = $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath($p)
         
             $params = @{ 
                 AsyncTask  = [StorageFile]::GetFileFromPathAsync($p)

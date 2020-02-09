@@ -462,8 +462,7 @@ function BGNotifier {
         $msg = "Your Arathi Basin Queue has Popped!"
     }
     elseif ($bgAlert -like "*disconnected*") {
-            $msg = "You have been disconnected from the game!"
-        }
+        $msg = "You have been disconnected from the game!"
     }
 
     # msg Discord
@@ -493,10 +492,10 @@ function BGNotifier {
             message = "$msg"
         }
         
-        if ($device) { $data.Add("device", "$device") }
-        if ($title) { $data.Add("title", "$title") }
+        if ($device)   { $data.Add("device", "$device") }
+        if ($title)    { $data.Add("title", "$title") }
         if ($priority) { $data.Add("priority", $priority) }
-        if ($sound) { $data.Add("sound", "$sound") }
+        if ($sound)    { $data.Add("sound", "$sound") }
 
         Invoke-RestMethod "https://api.pushover.net/1/messages.json" -Method POST -Body $data
     }

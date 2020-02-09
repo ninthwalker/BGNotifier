@@ -2,7 +2,7 @@
 <img align="center" src="https://raw.githubusercontent.com/ninthwalker/BGNotifier/master/screenshots/BGNotifier-logo.png" width="250"></p>
 <img src="https://raw.githubusercontent.com/ninthwalker/BGNotifier/master/screenshots/mobile2.png"> 
 Sends a message when your World of Warcraft Battleground Queue has popped.  
-Currently supports Discord, Telegram, Alexa 'Notify Me' Skill, Home Assistant scripts and Pushover (Thanks @pattont). If you want another notification type, let me know.  
+Currently supports Discord, Telegram, Text Messages, Alexa 'Notify Me' Skill, Home Assistant scripts and Pushover (Thanks @pattont). If you want another notification type, let me know.  
   
   
 Note: This does not interact with the game at any level or in any way.  
@@ -14,7 +14,7 @@ Default settings should work for most people. Just set up at least one notificat
 2. Powershell 3.0+ (Comes with WIN10)
 3. .Net Framework 3.5+ (Usually already on Windows 10 as well)
 4. A World of Warcraft Subscription. (You have to put this on your WIN 10 computer yourself)
-5. Discord, Telegram, Pushover or Alexa Device. (Other apps/notifications possible in the future if requested)  
+5. Discord, Telegram, Pushover, Cell Phone, or Alexa Device. (Other apps/notifications possible in the future if requested)  
 
 ## How it works
 It's super simple. It takes a screenshot of a specific area of your monitor (Where the BG Queue window pops up).  
@@ -57,7 +57,7 @@ Some initial configuration is required before it will work for you.
 If you right click and edit the BGNotifier.ps1 file you will see a section near the top that requires you to enter your own settings.
 
 **Note: The only required setting to make this work is to set up one notification type.**  
-Currently supported Notification apps are: Discord, Telegram, Pushover, Home Assistant and the Alexa 'Notify Me' Skill.  
+Currently supported Notification apps are: Discord, Telegram, Pushover, Text Messages, Home Assistant and the Alexa 'Notify Me' Skill.  
 
 ### Required Setting:  
 At least one of the below notification types is required. Or you can set up all 5 if you want!  
@@ -83,6 +83,18 @@ Get the Token by creating a bot by messaging @BotFather
 Get the ChatID by messaging your bot you created, or making your own group with the bot and messaging the group. Then get the ChatID for that conversation with the below step.  
 Go to this url replacing [telegramBotToken] with your own Bot's token and look for the chatID to use. 
 https://api.telegram.org/bot[telegramBotToken]/getUpdates
+
+## TEXT MESSAGE ##
+Note: I didn't want to code in all the carriers and all the emails. So only gmail is fully supported for now. If using 2FA, make a google app password from here: https://myaccount.google.com/security. Feel free to do a pull request to add more if it doesn't work with these default settings and options. Or just edit the below code with your own carrier and email settings.  
+Set textMsg to $True
+Enter carrier email, should be in the format of:  
+"@vtext.com", "@txt.att.net", "@messaging.sprintpcs.com", "@tmomail.net", "@msg.fi.google.com"
+$phoneNumber = "your cell phone number Here" # I didn't need to enter a '1' in front of my number, but you may need to for some carriers
+$smtpServer = "smtp.gmail.com" # change to your smtp if you dont use gmail. only Gmail tested though
+$smtpPort = "587" # change to your email providers port if not gmail.
+$fromAddress = "youremail@domain.com"
+$emailUser = "youremail@domain.com"
+$emailPass = "email or app password"  
 
 * **Alexa 'Notify Me' Skill**  
 Set alexa to $True to enable this notification type.  

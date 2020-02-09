@@ -16,7 +16,8 @@
 # Added in Text Message support                                     #
 # Added in tls1.2 enforcement (Telegram changed in FEB2020)         #
 # Added in Disconnect alert option                                  #
-# Changed default screenshot area to be middle top half             #
+# Changed default screenshot area to be middle top half of screen   #
+# Changed defalth path for screenshot to save to $env:temp          #
 #####################################################################
 
 using namespace Windows.Storage
@@ -541,7 +542,7 @@ function BGNotifier {
         $label_help.Visible = $True
         $form.MinimizeBox = $True
     }
-    elseif (($stopOnQueue -eq "Yes") {
+    elseif ($stopOnQueue -eq "Yes") {
         $label_status.ForeColor = "#FFFF00"
         $label_status.text = "Your BG Queue Popped!"
         $label_status.Refresh()

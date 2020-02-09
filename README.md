@@ -119,7 +119,7 @@ Your first click should be on the top left corner of the BG Queue window. Your s
 
 2. **Screenshot Path**  
 Set the path to where you would like the temporary screenshot to be saved to.  
-By default it goes to C:\temp\  
+By default it goes to your %temp% Directory.  
 
 3. **Screenshot Delay**  
 If you would like to change how often the script scans for the Battleground Queue Window you can enter a different time here in seconds.

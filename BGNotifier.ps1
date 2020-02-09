@@ -456,7 +456,7 @@ function BGNotifier {
         $msg = "Your Arathi Basin Queue has Popped!"
     }
     elseif ($bgAlert -like "*disconnected*") {
-        $msg = "You've been disconnected from the game!"
+        $msg = "You've been Disconnected!"
     }
 
     # msg Discord

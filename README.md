@@ -2,7 +2,7 @@
 <img align="center" src="https://raw.githubusercontent.com/ninthwalker/BGNotifier/master/screenshots/BGNotifier-logo.png" width="250"></p>
 <img src="https://raw.githubusercontent.com/ninthwalker/BGNotifier/master/screenshots/mobile2.png"> 
 Sends a message when your World of Warcraft Battleground Queue has popped.  
-Currently supports Discord, Telegram, Text Messages, Alexa 'Notify Me' Skill, Home Assistant scripts and Pushover (Thanks @pattont). If you want another notification type, let me know.  
+Currently supports Discord, Telegram, Text Messages, Alexa 'Notify Me' Skill, Home Assistant scripts and Pushover (Thanks @pattont). If you want another notification type, let me know.    
   
   
 Note: This does not interact with the game at any level or in any way.  
@@ -84,16 +84,16 @@ Get the ChatID by messaging your bot you created, or making your own group with 
 Go to this url replacing [telegramBotToken] with your own Bot's token and look for the chatID to use. 
 https://api.telegram.org/bot[telegramBotToken]/getUpdates
 
-## TEXT MESSAGE ##
+* **TEXT MESSAGE**  
 Note: I didn't want to code in all the carriers and all the emails. So only gmail is fully supported for now. If using 2FA, make a google app password from here: https://myaccount.google.com/security. Feel free to do a pull request to add more if it doesn't work with these default settings and options. Or just edit the below code with your own carrier and email settings.  
-Set textMsg to $True
+Set textMsg to $True  
 Enter carrier email, should be in the format of:  
-"@vtext.com", "@txt.att.net", "@messaging.sprintpcs.com", "@tmomail.net", "@msg.fi.google.com"
-$phoneNumber = "your cell phone number Here" # I didn't need to enter a '1' in front of my number, but you may need to for some carriers
-$smtpServer = "smtp.gmail.com" # change to your smtp if you dont use gmail. only Gmail tested though
-$smtpPort = "587" # change to your email providers port if not gmail.
-$fromAddress = "youremail@domain.com"
-$emailUser = "youremail@domain.com"
+"@vtext.com", "@txt.att.net", "@messaging.sprintpcs.com", "@tmomail.net", "@msg.fi.google.com"  
+$phoneNumber = "your cell phone number Here" # I didn't need to enter a '1' in front of my number, but you may need to for some carriers  
+$smtpServer = "smtp.gmail.com" # change to your smtp if you dont use gmail. only Gmail tested though  
+$smtpPort = "587" # change to your email providers port if not gmail.  
+$fromAddress = "youremail@domain.com"  
+$emailUser = "youremail@domain.com"  
 $emailPass = "email or app password"  
 
 * **Alexa 'Notify Me' Skill**  

@@ -103,7 +103,7 @@ $bottomRightX = 1979
 $bottomRightY = 356
 
 # Screenshot Location to save temporary img to for OCR Scan. Change if you want it somewhere else.
-$path = "C:\temp\"
+$path = $env:temp
 
 # Amount of seconds to wait before scanning for a battleground Queue window.
 # Note: this script uses hardly any resources and is very quick at the screenshot/OCR process.
@@ -287,7 +287,8 @@ function Get-Ocr {
             # https://docs.microsoft.com/en-us/windows/uwp/audio-video-camera/imaging#save-a-softwarebitmap-to-a-file-with-bitmapencoder
 
             # .Net method needs a full path, or at least might not have the same relative path root as PowerShell
-            $p = $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPSPath($p)
+            $p = $ExecutionContext.SessionState.Path.GetUnresolvedProviderPathFromPS
+            ($p)
         
             $params = @{ 
                 AsyncTask  = [StorageFile]::GetFileFromPathAsync($p)
@@ -450,13 +451,13 @@ function BGNotifier {
     }
 
     # set messages
-    if ($bgAlert -like "*Alterac*") {
+    if ($bgAlert -like "* enter Alterac*") {
         $msg = "Your Alterac Valley Queue has Popped!"
     }
-    elseif ($bgAlert -like "*Warsong*") {
+    elseif ($bgAlert -like "*enter Warsong*") {
         $msg = "Your Warsong Gulch Queue has Popped!"
     }
-    elseif ($bgAlert -like "*Arathi*") {
+    elseif ($bgAlert -like "*enter Arathi*") {
         $msg = "Your Arathi Basin Queue has Popped!"
     }
     elseif ($bgAlert -like "*disconnected*") {
@@ -542,7 +543,7 @@ function BGNotifier {
     }
     elseif (($stopOnQueue -eq "Yes") {
         $label_status.ForeColor = "#FFFF00"
-        $label_status.text = "You have been Disconnected!"
+        $label_status.text = "Your BG Queue Popped!"
         $label_status.Refresh()
         $button_stop.Enabled = $False
         $button_stop.Visible = $False
@@ -555,7 +556,6 @@ function BGNotifier {
     elseif ($stopOnQueue -eq "No") {
         BGNotifier
     }
-
 }
 
 # Form section

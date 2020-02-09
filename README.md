@@ -131,6 +131,11 @@ Default Value: 20 seconds, which should give you about 1 minute after you get th
 'Yes' will stop the script upon BG Queue detection. 'No' will have it continue to scan and must be stopped manually.  
 Default is 'Yes'  
 
+4. **Notify on Disconnect**  
+'Yes' will notify you if you have been disconnected from the game. 'No' will not.  
+Useful for logging back into the game during the grace period to stay in queue if you get disconnected early.  
+Default is 'Yes'  
+
 ## FAQ/Common Issues  
 1. As noted above, this app is entirely legal/safe/conforms to all TOS of Blizzard and World of Warcraft. This does not touch the game or files in any way.  
 2. Some of you may not have a C:\temp directory which is the default for where the screenshot is saved. If this is the case, either create the c:\temp folder on your computer, or modify the path to your own location in the advanced settings section of the script.  

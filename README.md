@@ -93,12 +93,6 @@ Enter carrier email, should be in the format of:
 Enter in your phone number, email address and email password.  
 Change the smtp server and port if you are not using Gmail.  
 
-$smtpServer = "smtp.gmail.com" # change to your smtp if you dont use gmail. only Gmail tested though  
-$smtpPort = "587" # change to your email providers port if not gmail.  
-$fromAddress = "youremail@domain.com"  
-$emailUser = "youremail@domain.com"  
-$emailPass = "email or app password"  
-
 * **Alexa 'Notify Me' Skill**  
 Set alexa to $True to enable this notification type.  
 Enable the Skill inside the Alexa app. once linked it will email you an Access Code.  

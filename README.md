@@ -2,7 +2,7 @@
 <img align="center" src="https://raw.githubusercontent.com/ninthwalker/BGNotifier/master/screenshots/BGNotifier-logo.png" width="250"></p>
 <img src="https://raw.githubusercontent.com/ninthwalker/BGNotifier/master/screenshots/mobile2.png"> 
 Sends a message when your World of Warcraft Battleground Queue has popped.  
-Currently supports Discord, Telegram, Alexa 'Notify Me' Skill, Home Assistant scripts and Pushover (Thanks @pattont). If you want another notification type, let me know.  
+Currently supports Discord, Telegram, Text Messages, Alexa 'Notify Me' Skill, Home Assistant scripts and Pushover (Thanks @pattont). If you want another notification type, let me know.    
   
   
 Note: This does not interact with the game at any level or in any way.  
@@ -14,7 +14,7 @@ Default settings should work for most people. Just set up at least one notificat
 2. Powershell 3.0+ (Comes with WIN10)
 3. .Net Framework 3.5+ (Usually already on Windows 10 as well)
 4. A World of Warcraft Subscription. (You have to put this on your WIN 10 computer yourself)
-5. Discord, Telegram, Pushover or Alexa Device. (Other apps/notifications possible in the future if requested)  
+5. Discord, Telegram, Pushover, Cell Phone, or Alexa Device. (Other apps/notifications possible in the future if requested)  
 
 ## How it works
 It's super simple. It takes a screenshot of a specific area of your monitor (Where the BG Queue window pops up).  
@@ -57,32 +57,41 @@ Some initial configuration is required before it will work for you.
 If you right click and edit the BGNotifier.ps1 file you will see a section near the top that requires you to enter your own settings.
 
 **Note: The only required setting to make this work is to set up one notification type.**  
-Currently supported Notification apps are: Discord, Telegram, Pushover, Home Assistant and the Alexa 'Notify Me' Skill.  
+Currently supported Notification apps are: Discord, Telegram, Pushover, Text Messages, Home Assistant and the Alexa 'Notify Me' Skill.  
 
 ### Required Setting:  
 At least one of the below notification types is required. Or you can set up all 5 if you want!  
 
-* **Discord Webhook URL**  
+* **Discord**  
 Set discord to $True to enable this notification type.
 Enter in the discord webhook for the channel you would like the notification to go to.  
 Discord > Click cogwheel next to a channel to edit it > Webhooks > Create webhook.
 See this quick video I found on Youtube if you need further help. It's very easy. Do not share this Webhook with anyone else.  
 [Create Discord Webhook](https://www.youtube.com/watch?v=zxi926qhP7w)  
 
-* **Pushover.Net Webhook URL**  
+* **Pushover**  
 Set pushover to $True to enable this notification type.  
 Log in and create a new application in your Pushover.net account.  
 Copy the User API Key and the newly created Application API Key to the Pushover variables.  
 Set the optional commented out settings if desired.  
 (Thanks to @pattont for this Notification Type)    
 
-* **Telegram Bot**  
+* **Telegram**  
 This can be a little more complicated to set up, but you can look online for further help. The basics are below but I didn't go into detail:  
 Set telegram to $True to enable this notification type.  
 Get the Token by creating a bot by messaging @BotFather  
 Get the ChatID by messaging your bot you created, or making your own group with the bot and messaging the group. Then get the ChatID for that conversation with the below step.  
 Go to this url replacing [telegramBotToken] with your own Bot's token and look for the chatID to use. 
 https://api.telegram.org/bot[telegramBotToken]/getUpdates
+
+* **Text Message**  
+Note: I didn't want to code in all the carriers and all the emails. So only Gmail is fully supported for now. If using 2FA, make a google app password from here: https://myaccount.google.com/security.  
+Feel free to do a pull request to add more if it doesn't work with these default settings and options. Or just edit the below code with your own carrier and email settings.  
+Set textMsg to $True  to enable this notification type.  
+Enter carrier email, should be in the format of:  
+"@vtext.com", "@txt.att.net", "@messaging.sprintpcs.com", "@tmomail.net", "@msg.fi.google.com"  
+Enter in your phone number, email address and email password.  
+Change the smtp server and port if you are not using Gmail.  
 
 * **Alexa 'Notify Me' Skill**  
 Set alexa to $True to enable this notification type.  
@@ -110,7 +119,7 @@ Your first click should be on the top left corner of the BG Queue window. Your s
 
 2. **Screenshot Path**  
 Set the path to where you would like the temporary screenshot to be saved to.  
-By default it goes to C:\temp\  
+By default it goes to your %temp% Directory.  
 
 3. **Screenshot Delay**  
 If you would like to change how often the script scans for the Battleground Queue Window you can enter a different time here in seconds.
@@ -122,10 +131,14 @@ Default Value: 20 seconds, which should give you about 1 minute after you get th
 'Yes' will stop the script upon BG Queue detection. 'No' will have it continue to scan and must be stopped manually.  
 Default is 'Yes'  
 
+4. **Notify on Disconnect**  
+'Yes' will notify you if you have been disconnected from the game. 'No' will not.  
+Useful for logging back into the game during the grace period to stay in queue if you get disconnected early.  
+Default is 'Yes'  
+
 ## FAQ/Common Issues  
 1. As noted above, this app is entirely legal/safe/conforms to all TOS of Blizzard and World of Warcraft. This does not touch the game or files in any way.  
-2. Some of you may not have a C:\temp directory which is the default for where the screenshot is saved. If this is the case, either create the c:\temp folder on your computer, or modify the path to your own location in the advanced settings section of the script.  
-3. make sure you have double quotes around your app webhooks in the script. "webhook here"  
+3. make sure you have double quotes around your app webhooks and most settings you configured in the script. ie: "webhook here"  
 
 ## Screenshots & Videos  
 

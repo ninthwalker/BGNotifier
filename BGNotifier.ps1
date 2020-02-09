@@ -3,8 +3,21 @@
 # Desc: Notifies you if a Classic WoW Battleground Queue has popped #
 # Author: Ninthwalker                                               #
 # Instructions: https://github.com/ninthwalker/BGNotifier           #
-# Date: 10JAN2020 *Happy New Year!*                                 #
-# Version: 1.1                                                      #
+# Date: 09FEB2020                                                   #
+# Version: 1.2                                                      #
+#####################################################################
+
+############################ CHANGE LOG #############################
+## 1.0                                                              #
+# Initial App version                                               #
+## 1.1                                                              #
+# Added in Pushover notification support. Thanks to @pattont        #
+## 1.2                                                              #
+# Added in Text Message support                                     #
+# Added in tls1.2 enforcement (Telegram changed in FEB2020)         #
+# Added in Disconnect alert option                                  #
+# Changed default screenshot area to be middle top half of screen   #
+# Changed default path for screenshot to save to $env:temp          #
 #####################################################################
 
 using namespace Windows.Storage
@@ -22,6 +35,7 @@ using namespace Windows.Graphics.Imaging
 # Set the notification app you want to use to '$True' to enable it or '$False' to disable it.
 # Then enter your webhook or API type tokens for the notification type you want to use.
 # All Notifications are set to $False by default.
+# See the Adavanced section below this for extra features.
 
 ## DISCORD ##
 $discord = $False
@@ -40,12 +54,24 @@ $telegramChatID =  "-371-EXAMPLE-556032"
 $pushover = $False
 $pushoverAppToken = "GetFromPushoverDotNet"
 $pushoverUserToken = "GetFromPushoverDotNet"
-
 # optional Pushover settings. Uncomment and set if wanted.
 #$device = "Device"
-#$title = "Title"
+#$title = "Title" 
 #$priority = "Priority"
 #$sound = "Sound"
+
+## TEXT MESSAGE ##
+$textMsg = $False
+# Note: I didn't want to code in all the carriers and all the emails. So only gmail is fully supported for now. If using 2FA, make a google app password from here: https://myaccount.google.com/security
+# Feel free to do a pull request to add more if it doesn't work with these default settings optinos. Or just edit the below code with your own carrier and email settings.
+# Enter carrier email, should be in the format of: "@vtext.com", "@txt.att.net", "@messaging.sprintpcs.com", "@tmomail.net", "@msg.fi.google.com"
+$CarrierEmail = "@txt.att.net" # change to your cell carrier
+$phoneNumber = "your phone number" # I didn't need to enter a '1' in front of my number, but you may need to for some carriers
+$smtpServer = "smtp.gmail.com" # change to your smtp if you dont use gmail. only Gmail tested though
+$smtpPort = "587" # change to your email providers port if not gmail.
+$fromAddress = "youremail@domain.com" # usually your email
+$emailUser = "youremail@domain.com" # your email address
+$emailPass = "your email pass or app password"
 
 ## ALEXA NOTIFY ME SKILL ##
 $alexa = $False
@@ -78,7 +104,7 @@ $bottomRightX = 1979
 $bottomRightY = 356
 
 # Screenshot Location to save temporary img to for OCR Scan. Change if you want it somewhere else.
-$path = "C:\temp\"
+$path = $env:temp
 
 # Amount of seconds to wait before scanning for a battleground Queue window.
 # Note: this script uses hardly any resources and is very quick at the screenshot/OCR process.
@@ -90,10 +116,23 @@ $delay = 20
 # Default is 'Yes', stop scanning after it detects a BG Queue pop.
 $stopOnQueue = "Yes"
 
+# Option to notify if you get disconnected. Looks for the 'disconnected' message on the login screen.
+# You usually have a couple minutes to login back in and still be in the BG Queue.
+# You will need to restart the BG Notifier App if you set this to True and a disconnect occurs.
+$notifyOnDisconnect = $True
 
 #########################################
 ### DO NOT MODIFY ANYTHING BELOW THIS ###
 #########################################
+
+# Force tls1.2 - mainly for telegram since they recently changed this in FEB2020
+[Net.ServicePointManager]::SecurityProtocol = [Net.SecurityProtocolType]::Tls12
+
+# If usuing text method, convert password into secure credential object
+if ($textMsg) {
+    [SecureString]$secureEmailPass = $emailPass | ConvertTo-SecureString -AsPlainText -Force 
+    [PSCredential]$emailCreds = New-Object System.Management.Automation.PSCredential -ArgumentList $emailUser, $secureEmailPass
+}
 
 # Screenshot method
 Add-Type -AssemblyName System.Windows.Forms,System.Drawing
@@ -343,18 +382,21 @@ Function Get-Window {
     }
 }
 
-# default screenshot area if no coordinates specified in the above user section
+# default screenshot area if no coordinates specified in the above user section.
+# Also tries to detect which window your game is running on, if using multiple monitors
+# Get's the middlle top half of the screen area to look for BG Queue pop and disconnect messages
 if ($useMyOwnCoordinates -eq "No") {
     $window = Get-Process | ? {$_.MainWindowTitle -like "World of Warcraft"} | Get-Window | select -First 1
     $topleftX = [math]::floor($window.BottomRight.x / 3)
     $topLeftY = 0
     $bottomRightX = [math]::floor($topLeftX * 2)
-    $bottomRightY = [math]::floor($window.BottomRight.y / 3)
+    $bottomRightY = [math]::floor($window.BottomRight.y / 2)
 }
 
 
 # Notification function
 function BGNotifier {
+    $disconnected = $False
     $button_start.Enabled = $False
     $button_start.Visible = $False
     $button_stop.Enabled = $True
@@ -391,23 +433,30 @@ function BGNotifier {
 
         Get-BGQueue
         $bgAlert = (Get-Ocr $path\BGNotifier_Img.png).Text
-        
+        if ($notifyOnDisconnect) {
+            if ($bgAlert -like "*disconnected*") {
+                $disconnected = $True
+            }
+        }     
     }
-    Until (($bgAlert -like "*Alterac*") -or ($bgAlert -like "*Warsong*") -or ($bgAlert -like "*Arathi*"))
+    Until (($bgAlert -like "*enter Alterac*") -or ($bgAlert -like "*enter Warsong*") -or ($bgAlert -like "*enter Arathi*") -or ($disconnected))
 
     if ($script:cancelLoop) {
         Return
     }
 
     # set messages
-    if ($bgAlert -like "*Alterac*") {
+    if ($bgAlert -like "* enter Alterac*") {
         $msg = "Your Alterac Valley Queue has Popped!"
     }
-    elseif ($bgAlert -like "*Warsong*") {
+    elseif ($bgAlert -like "*enter Warsong*") {
         $msg = "Your Warsong Gulch Queue has Popped!"
     }
-    elseif ($bgAlert -like "*Arathi*") {
+    elseif ($bgAlert -like "*enter Arathi*") {
         $msg = "Your Arathi Basin Queue has Popped!"
+    }
+    elseif ($bgAlert -like "*disconnected*") {
+        $msg = "You've been Disconnected!"
     }
 
     # msg Discord
@@ -437,14 +486,19 @@ function BGNotifier {
             message = "$msg"
         }
         
-        if ($device) { $data.Add("device", "$device") }
-        if ($title) { $data.Add("title", "$title") }
+        if ($device)   { $data.Add("device", "$device") }
+        if ($title)    { $data.Add("title", "$title") }
         if ($priority) { $data.Add("priority", $priority) }
-        if ($sound) { $data.Add("sound", "$sound") }
+        if ($sound)    { $data.Add("sound", "$sound") }
 
         Invoke-RestMethod "https://api.pushover.net/1/messages.json" -Method POST -Body $data
     }
-
+    
+    # text Msg
+    if ($textMsg) {
+        Send-MailMessage -SmtpServer $smtpServer -Port $smtpPort -UseSsl -Priority High -from $fromAddress -to $($phoneNumber+$CarrierEmail) -Subject "BG Alert" -Body $msg -Credential $emailCreds
+    }
+    
     # msg Alexa
     if ($alexa) {
         $alexaBody = @{
@@ -469,9 +523,21 @@ function BGNotifier {
         Invoke-RestMethod -Uri "$hassURL/api/services/script/toggle" -Method POST -Headers $hassHeaders -Body $hassBody
     }
     
-    if ($stopOnQueue -eq "Yes") {
+    if ($bgAlert -like "*disconnected*") {
         $label_status.ForeColor = "#FFFF00"
-        $label_status.text = "Your Queue Popped!"
+        $label_status.text = "You've been Disconnected!"
+        $label_status.Refresh()
+        $button_stop.Enabled = $False
+        $button_stop.Visible = $False
+        $button_start.Enabled = $True
+        $button_start.Visible = $True
+        $script:label_coords_text.Visible = $True
+        $label_help.Visible = $True
+        $form.MinimizeBox = $True
+    }
+    elseif ($stopOnQueue -eq "Yes") {
+        $label_status.ForeColor = "#FFFF00"
+        $label_status.text = "Your BG Queue Popped!"
         $label_status.Refresh()
         $button_stop.Enabled = $False
         $button_stop.Visible = $False
@@ -484,7 +550,6 @@ function BGNotifier {
     elseif ($stopOnQueue -eq "No") {
         BGNotifier
     }
-
 }
 
 # Form section

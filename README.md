@@ -62,21 +62,21 @@ Currently supported Notification apps are: Discord, Telegram, Pushover, Text Mes
 ### Required Setting:  
 At least one of the below notification types is required. Or you can set up all 5 if you want!  
 
-* **Discord Webhook URL**  
+* **Discord**  
 Set discord to $True to enable this notification type.
 Enter in the discord webhook for the channel you would like the notification to go to.  
 Discord > Click cogwheel next to a channel to edit it > Webhooks > Create webhook.
 See this quick video I found on Youtube if you need further help. It's very easy. Do not share this Webhook with anyone else.  
 [Create Discord Webhook](https://www.youtube.com/watch?v=zxi926qhP7w)  
 
-* **Pushover.Net Webhook URL**  
+* **Pushover**  
 Set pushover to $True to enable this notification type.  
 Log in and create a new application in your Pushover.net account.  
 Copy the User API Key and the newly created Application API Key to the Pushover variables.  
 Set the optional commented out settings if desired.  
 (Thanks to @pattont for this Notification Type)    
 
-* **Telegram Bot**  
+* **Telegram**  
 This can be a little more complicated to set up, but you can look online for further help. The basics are below but I didn't go into detail:  
 Set telegram to $True to enable this notification type.  
 Get the Token by creating a bot by messaging @BotFather  
@@ -138,8 +138,7 @@ Default is 'Yes'
 
 ## FAQ/Common Issues  
 1. As noted above, this app is entirely legal/safe/conforms to all TOS of Blizzard and World of Warcraft. This does not touch the game or files in any way.  
-2. Some of you may not have a C:\temp directory which is the default for where the screenshot is saved. If this is the case, either create the c:\temp folder on your computer, or modify the path to your own location in the advanced settings section of the script.  
-3. make sure you have double quotes around your app webhooks in the script. "webhook here"  
+3. make sure you have double quotes around your app webhooks and most settings you configured in the script. ie: "webhook here"  
 
 ## Screenshots & Videos  
 

@@ -442,8 +442,7 @@ function BGNotifier {
             if ($bgAlert -like "*disconnected*") {
                 $disconnected = $True
             }
-        }
-        
+        }     
     }
     Until (($bgAlert -like "*enter Alterac*") -or ($bgAlert -like "*enter Warsong*") -or ($bgAlert -like "*enter Arathi*") -or ($disconnected))
 

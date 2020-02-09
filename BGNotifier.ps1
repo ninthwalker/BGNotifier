@@ -456,7 +456,7 @@ function BGNotifier {
         $msg = "Your Arathi Basin Queue has Popped!"
     }
     elseif ($bgAlert -like "*disconnected*") {
-        $msg = "You have been disconnected from the game!"
+        $msg = "You've been disconnected from the game!"
     }
 
     # msg Discord
@@ -525,7 +525,7 @@ function BGNotifier {
     
     if ($bgAlert -like "*disconnected*") {
         $label_status.ForeColor = "#FFFF00"
-        $label_status.text = "You have been Disconnected"
+        $label_status.text = "You've been Disconnected!"
         $label_status.Refresh()
         $button_stop.Enabled = $False
         $button_stop.Visible = $False

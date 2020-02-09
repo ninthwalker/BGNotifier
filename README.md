@@ -85,11 +85,14 @@ Go to this url replacing [telegramBotToken] with your own Bot's token and look f
 https://api.telegram.org/bot[telegramBotToken]/getUpdates
 
 * **TEXT MESSAGE**  
-Note: I didn't want to code in all the carriers and all the emails. So only gmail is fully supported for now. If using 2FA, make a google app password from here: https://myaccount.google.com/security. Feel free to do a pull request to add more if it doesn't work with these default settings and options. Or just edit the below code with your own carrier and email settings.  
-Set textMsg to $True  
+Note: I didn't want to code in all the carriers and all the emails. So only Gmail is fully supported for now. If using 2FA, make a google app password from here: https://myaccount.google.com/security.  
+Feel free to do a pull request to add more if it doesn't work with these default settings and options. Or just edit the below code with your own carrier and email settings.  
+Set textMsg to $True  to enable this notification type.
 Enter carrier email, should be in the format of:  
 "@vtext.com", "@txt.att.net", "@messaging.sprintpcs.com", "@tmomail.net", "@msg.fi.google.com"  
-$phoneNumber = "your cell phone number Here" # I didn't need to enter a '1' in front of my number, but you may need to for some carriers  
+Enter in your phone number, email address and email password.  
+Change the smtp server and port if you are not using Gmail.  
+
 $smtpServer = "smtp.gmail.com" # change to your smtp if you dont use gmail. only Gmail tested though  
 $smtpPort = "587" # change to your email providers port if not gmail.  
 $fromAddress = "youremail@domain.com"  

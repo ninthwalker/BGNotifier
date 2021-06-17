@@ -1,24 +1,28 @@
-#####################################################################
-# Name: BGNotifier                                                  #
-# Desc: Notifies you if a Classic WoW Battleground Queue has popped #
-# Author: Ninthwalker                                               #
-# Instructions: https://github.com/ninthwalker/BGNotifier           #
-# Date: 09FEB2020                                                   #
-# Version: 1.2                                                      #
-#####################################################################
+#########################################################################
+# Name: BGNotifier                                                      #
+# Desc: Notifies you if a Classic/BCC WoW Battleground Queue has popped #
+# Author: Ninthwalker                                                   #
+# Instructions: https://github.com/ninthwalker/BGNotifier               #
+# Date: 16JUN2021                                                       #
+# Version: 1.3                                                          #
+#########################################################################
 
-############################ CHANGE LOG #############################
-## 1.0                                                              #
-# Initial App version                                               #
-## 1.1                                                              #
-# Added in Pushover notification support. Thanks to @pattont        #
-## 1.2                                                              #
-# Added in Text Message support                                     #
-# Added in tls1.2 enforcement (Telegram changed in FEB2020)         #
-# Added in Disconnect alert option                                  #
-# Changed default screenshot area to be middle top half of screen   #
-# Changed default path for screenshot to save to $env:temp          #
-#####################################################################
+############################## CHANGE LOG ###############################
+## 1.3                                                                  #
+# Burning Crusade Classic Support                                       #
+# Added Eye of the Storm Battleground                                   #
+# Some formatting and grammar                                           #
+## 1.2                                                                  #
+# Added in Text Message support                                         #
+# Added in tls1.2 enforcement (Telegram changed in FEB2020)             #
+# Added in Disconnect alert option                                      #
+# Changed default screenshot area to be middle top half of screen       #
+# Changed default path for screenshot to save to $env:temp              # 
+## 1.1                                                                  #
+# Added in Pushover notification support. Thanks to @pattont            #
+## 1.0                                                                  #
+# Initial App version                                                   #
+#########################################################################
 
 using namespace Windows.Storage
 using namespace Windows.Graphics.Imaging
@@ -31,7 +35,7 @@ using namespace Windows.Graphics.Imaging
 ### REQUIRED SETTINGS ###
 #########################
 
-# One or more notifiaction apps are required. One or All of them can be used at the same time.
+# One or more notification apps are required. One or All of them can be used at the same time.
 # Set the notification app you want to use to '$True' to enable it or '$False' to disable it.
 # Then enter your webhook or API type tokens for the notification type you want to use.
 # All Notifications are set to $False by default.
@@ -356,7 +360,7 @@ Function Get-Window {
         }
     }
     Process {        
-        Get-Process -Name $ProcessName | ForEach {
+        Get-Process -Name $ProcessName | ForEach-Object {
             $Handle = $_.MainWindowHandle
             $Rectangle = New-Object RECT
             $Return = [Window]::GetWindowRect($Handle,[ref]$Rectangle)
@@ -384,9 +388,9 @@ Function Get-Window {
 
 # default screenshot area if no coordinates specified in the above user section.
 # Also tries to detect which window your game is running on, if using multiple monitors
-# Get's the middlle top half of the screen area to look for BG Queue pop and disconnect messages
+# Get's the middle top half of the screen area to look for BG Queue pop and disconnect messages
 if ($useMyOwnCoordinates -eq "No") {
-    $window = Get-Process | ? {$_.MainWindowTitle -like "World of Warcraft"} | Get-Window | select -First 1
+    $window = Get-Process | Where-Object {$_.MainWindowTitle -like "*World of Warcraft*"} | Get-Window | Select-Object -First 1
     $topleftX = [math]::floor($window.BottomRight.x / 3)
     $topLeftY = 0
     $bottomRightX = [math]::floor($topLeftX * 2)
@@ -428,7 +432,7 @@ function BGNotifier {
                 Break check
             }
 
-            Sleep -Seconds 1
+            Start-Sleep -Seconds 1
         }
 
         Get-BGQueue
@@ -439,14 +443,14 @@ function BGNotifier {
             }
         }     
     }
-    Until (($bgAlert -like "*enter Alterac*") -or ($bgAlert -like "*enter Warsong*") -or ($bgAlert -like "*enter Arathi*") -or ($disconnected))
+    Until (($bgAlert -like "*enter Alterac*") -or ($bgAlert -like "*enter Warsong*") -or ($bgAlert -like "*enter Arathi*") -OR ($bgAlert -like "*enter Eye*") -or ($disconnected))
 
     if ($script:cancelLoop) {
         Return
     }
 
     # set messages
-    if ($bgAlert -like "* enter Alterac*") {
+    if ($bgAlert -like "*enter Alterac*") {
         $msg = "Your Alterac Valley Queue has Popped!"
     }
     elseif ($bgAlert -like "*enter Warsong*") {
@@ -454,6 +458,9 @@ function BGNotifier {
     }
     elseif ($bgAlert -like "*enter Arathi*") {
         $msg = "Your Arathi Basin Queue has Popped!"
+    }
+    elseif ($bgAlert -like "*enter Eye*") {
+        $msg = "Your Eye of the Storm Queue has Popped!"
     }
     elseif ($bgAlert -like "*disconnected*") {
         $msg = "You've been Disconnected!"

@@ -443,7 +443,7 @@ function BGNotifier {
             }
         }     
     }
-    Until (($bgAlert -like "*enter Alterac*") -or ($bgAlert -like "*enter Warsong*") -or ($bgAlert -like "*enter Arathi*") -OR ($bgAlert -like "*enter Eye*") -or ($disconnected))
+    Until (($bgAlert -like "*enter Alterac*") -or ($bgAlert -like "*enter Warsong*") -or ($bgAlert -like "*enter Arathi*") -or ($bgAlert -like "*enter Eye*") -or ($disconnected))
 
     if ($script:cancelLoop) {
         Return

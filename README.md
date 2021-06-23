@@ -6,7 +6,7 @@ Currently supports Discord, Telegram, Text Messages, Alexa 'Notify Me' Skill, Ho
   
   
 Note: This does not interact with the game at any level or in any way.  
-Note2: This is only for Classic for now. While it is easily modified to work for Retail, the queue's there are not that bad.
+Note2: This is only for Classic/TBC for now. While it is easily modified to work for Retail, the queue's there are not that bad.
 Default settings should work for most people. Just set up at least one notification app and you are good to go!  
 
 ## Details/Requirements
